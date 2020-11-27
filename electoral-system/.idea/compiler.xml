@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="information-hub" />
+        <module name="candidate" />
+        <module name="ballot-collector" />
+      </profile>
+      <profile name="Annotation profile for core" enabled="true">
+        <sourceOutputDir name="../system-registration-manager/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../system-registration-manager/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="core" />
+      </profile>
+      <profile name="Annotation profile for electoral-system" enabled="true">
+        <sourceOutputDir name="../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="system-registration-manager" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ballot-collector" target="11" />
+      <module name="candidate" target="11" />
+      <module name="core" target="11" />
+      <module name="electoral-system" target="1.5" />
+      <module name="information-hub" target="11" />
+      <module name="system-registration-manager" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="electoral-system" options="" />
+    </option>
+  </component>
+</project>

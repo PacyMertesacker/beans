@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/ballot-collector/ballot-collector.iml" filepath="$PROJECT_DIR$/electoral-system/ballot-collector/ballot-collector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/candidate/candidate.iml" filepath="$PROJECT_DIR$/electoral-system/candidate/candidate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/core/core.iml" filepath="$PROJECT_DIR$/electoral-system/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/electoral-system.iml" filepath="$PROJECT_DIR$/electoral-system/electoral-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/information-hub/information-hub.iml" filepath="$PROJECT_DIR$/electoral-system/information-hub/information-hub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/system-registration-manager/system-registration-manager.iml" filepath="$PROJECT_DIR$/electoral-system/system-registration-manager/system-registration-manager.iml" />
+    </modules>
+  </component>
+</project>
