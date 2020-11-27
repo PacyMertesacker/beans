@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="information-hub" />
         <module name="candidate" />
         <module name="ballot-collector" />
+        <module name="information-hub" />
+        <module name="voter" />
       </profile>
       <profile name="Annotation profile for core" enabled="true">
         <sourceOutputDir name="../system-registration-manager/target/generated-sources/annotations" />
@@ -25,12 +26,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ballot-collector" target="11" />
-      <module name="candidate" target="11" />
-      <module name="core" target="11" />
+      <module name="ballot-collector" target="14" />
+      <module name="candidate" target="14" />
+      <module name="core" target="14" />
       <module name="electoral-system" target="1.5" />
-      <module name="information-hub" target="11" />
-      <module name="system-registration-manager" target="11" />
+      <module name="information-hub" target="14" />
+      <module name="system-registration-manager" target="14" />
+      <module name="voter" target="14" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

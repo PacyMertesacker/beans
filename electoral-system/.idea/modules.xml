@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/electoral-system/electoral-system.iml" filepath="$PROJECT_DIR$/electoral-system/electoral-system.iml" />
       <module fileurl="file://$PROJECT_DIR$/electoral-system/information-hub/information-hub.iml" filepath="$PROJECT_DIR$/electoral-system/information-hub/information-hub.iml" />
       <module fileurl="file://$PROJECT_DIR$/electoral-system/system-registration-manager/system-registration-manager.iml" filepath="$PROJECT_DIR$/electoral-system/system-registration-manager/system-registration-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/electoral-system/voter/voter.iml" filepath="$PROJECT_DIR$/electoral-system/voter/voter.iml" />
     </modules>
   </component>
 </project>

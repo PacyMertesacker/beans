@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/electoral-system/pom.xml" />
+        <option value="$PROJECT_DIR$/electoral-system/voter/pom.xml" />
       </list>
     </option>
   </component>

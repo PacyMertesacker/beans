@@ -1,13 +1,11 @@
-package beans.electoralsystem.voter;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class VoterApplication {
+public class InformationHubApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VoterApplication.class, args);
+		SpringApplication.run(InformationHubApplication.class, args);
 	}
 
 }
