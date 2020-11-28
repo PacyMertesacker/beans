@@ -10,12 +10,12 @@ public class Main {
             String serverIp = "127.0.0.1";
             String keyspace = "system";
 
+            // Create Cassandra cluster:
             Cluster cluster = Cluster.builder()
                 .addContactPoints(serverIp)
                 .build();
 
             Session session = cluster.connect();
-
             String exampkeyspace = "exampkeyspace";
             String statement = "CREATE KEYSPACE "+ exampkeyspace +" WITH replication = {'class':'SimpleStrategy','replication_factor':1}";
 
@@ -26,8 +26,6 @@ public class Main {
                     ex.printStackTrace();
                 }
             }
-
-            keyspace = "exampkeyspace";
 
             cluster = Cluster.builder()
                 .addContactPoints(serverIp)
@@ -40,6 +38,7 @@ public class Main {
                       " password varchar " + 
                       ");";
             try {
+                session.execute("USE " + exampkeyspace);
                 session.execute(statement);
             } catch (AlreadyExistsException ex) {
                 if (!ex.getMessage().equals("Table exampkeyspace.users already exists")) {
@@ -76,4 +75,15 @@ public class Main {
             ex.printStackTrace();
         }
     }
+
+    /**
+    Test Data
+     */
+    private static final String [] users = {
+        new String("Adam, Password1"),
+        new String("Beth, Password2"),
+        new String("Carl, Password3"),
+        new String("Daniel, Password4"),
+        new String("Edith, Password5")
+    };
 }
