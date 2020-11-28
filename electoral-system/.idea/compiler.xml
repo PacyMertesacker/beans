@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="core" />
+        <module name="candidate" />
+        <module name="ballot-collector" />
+        <module name="information-hub" />
+        <module name="system-registration-manager" />
+        <module name="voter" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ballot-collector" target="14" />
+      <module name="candidate" target="14" />
+      <module name="core" target="14" />
+      <module name="electoral-system" target="1.5" />
+      <module name="information-hub" target="14" />
+      <module name="system-registration-manager" target="14" />
+      <module name="voter" target="14" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="electoral-system" options="" />
+    </option>
+  </component>
+</project>
