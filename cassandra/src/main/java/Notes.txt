@@ -1,0 +1,7 @@
+For Cassandra:
+
+Make a single keyspace - it represents the database.
+This keyspace will contain tables:
+    - Voter Table 
+    - Candidate Table
+    - Infomation Hub Storage
