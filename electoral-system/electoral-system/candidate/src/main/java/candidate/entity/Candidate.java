@@ -1,36 +1,49 @@
-package Entity;
+package candidate.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
-
-import java.util.UUID;
+import org.springframework.lang.NonNull;
 
 @Table
 public class Candidate {
-    @PrimaryKey private final UUID id;
+    @Id
+    @NonNull
+    @PrimaryKey
+    private String id;
+    @NonNull
     @Column
     // name never changes
-    private final String name;
+    private String name;
     @Column
     // party and bio can be edited with a patch or put request
     private String party;
     @Column
     private String bio;
 
-    public Candidate(UUID id, String name, String party, String bio) {
-        this.id = id;
+    public Candidate(@JsonProperty("name") String name, @JsonProperty("party") String party,
+                     @JsonProperty("bio") String bio) {
         this.name = name;
         this.party = party;
         this.bio = bio;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(@NonNull String name) {
+        this.name = name;
     }
 
     public String getParty() {

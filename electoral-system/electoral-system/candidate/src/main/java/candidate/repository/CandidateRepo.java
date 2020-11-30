@@ -1,13 +1,16 @@
-package Repository;
+package candidate.repository;
 
-import Entity.Candidate;
+import candidate.entity.Candidate;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface CandidateRepo extends CassandraRepository<Candidate, String> {
-    Optional<Candidate> findByNameAndParty(String name, String party);
+    Optional<Candidate> findByName(String name);
+
+    boolean existsByName(String Name);
+
+    void deleteByName(String name);
 }
