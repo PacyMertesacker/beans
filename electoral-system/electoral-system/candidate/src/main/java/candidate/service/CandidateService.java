@@ -4,19 +4,19 @@ import candidate.entity.Candidate;
 import candidate.repository.CandidateRepo;
 import exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CandidateService {
-    private final CandidateRepo candidateRepo;
+    @Autowired CandidateRepo candidateRepo;
 
-    @Autowired
+
+    /*@Autowired
     public CandidateService(@Qualifier("CandidateRepo") CandidateRepo candidateRepo) {
         this.candidateRepo = candidateRepo;
-    }
+    }*/
 
     public Candidate addCandidate(Candidate candidate) {
         if(!candidateRepo.existsByName(candidate.getName()))

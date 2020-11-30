@@ -11,12 +11,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/candidate")
 public class CandidateController {
-    private final CandidateService candidateService;
 
-    @Autowired
+    @Autowired CandidateService candidateService;
+
+   /* @Autowired
     public CandidateController(@Qualifier("CandidateService") CandidateService candidateService) {
         this.candidateService = candidateService;
-    }
+    }*/
 
     @PostMapping
     public Candidate postCandidate(@RequestBody Candidate candidate) {
