@@ -65,7 +65,7 @@ public class Main {
                 System.out.println(row.toString());
             }
 
-            session.execute(cqlStatement);
+            session.execute(cqlStatementU);
 
             statement = "DROP TABLE exampkeyspace.users";
             session.execute(statement);
