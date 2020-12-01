@@ -1,10 +1,9 @@
 package voter.service;
 
-import voter.entity.Voter;
+import entity.Voter;
 import voter.repository.VoterRepo;
 import exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 public class VoterService {

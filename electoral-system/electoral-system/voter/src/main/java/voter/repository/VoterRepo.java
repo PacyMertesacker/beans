@@ -1,6 +1,6 @@
 package voter.repository;
 
-import voter.entity.Voter;
+import entity.Voter;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 

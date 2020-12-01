@@ -1,4 +1,4 @@
-package voter.entity;
+package entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,6 @@ import org.springframework.lang.NonNull;
 @Table
 public class Voter{
     @Id
-    @NonNull
     @PrimaryKey
     private String id;
     @NonNull
@@ -75,7 +74,7 @@ public class Voter{
 
     @Override
     public String toString() {
-        return String.format("{ id = %1$s \n name = %2$s \n region = %3$s \n address = %4$s}", getId().toString(),
+        return String.format("{ id = %1$s \n name = %2$s \n region = %3$s \n address = %4$s}", getId(),
                 getName(), getRegion(), getAddress());
     }
 }

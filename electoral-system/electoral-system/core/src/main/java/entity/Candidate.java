@@ -1,4 +1,4 @@
-package candidate.entity;
+package entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
@@ -10,7 +10,6 @@ import org.springframework.lang.NonNull;
 @Table
 public class Candidate {
     @Id
-    @NonNull
     @PrimaryKey
     private String id;
     @NonNull
@@ -64,7 +63,7 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return String.format("{ id = %1$s \n name = %2$s \n party = %3$s \n bio = %4$s}", getId().toString(),
+        return String.format("{ id = %1$s \n name = %2$s \n party = %3$s \n bio = %4$s}", getId(),
                 getName(), getParty(), getBio());
     }
 }

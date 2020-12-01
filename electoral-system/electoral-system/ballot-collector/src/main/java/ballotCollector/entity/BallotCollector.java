@@ -1,7 +1,7 @@
 package ballotCollector.entity;
 
 import java.util.HashMap;
-import candidate.entity.Candidate;
+import entity.Candidate;
 import lombok.NonNull;
 
 import org.springframework.data.annotation.Id;
