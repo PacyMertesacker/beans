@@ -1,5 +1,6 @@
 package ballotCollector.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ballotCollector.entity.BallotCollector;
 import ballotCollector.service.BallotCollectorService;
+import core.entity.Candidate;
 
 @RestController
 @RequestMapping("/ballotcollector")
@@ -24,6 +26,12 @@ public class BallotCollectorController {
     @PostMapping
     public BallotCollector postBallotCollector(@RequestBody BallotCollector ballotCollector) {
         return ballotCollectorService.addBallotCollector(ballotCollector);
+    }
+
+    
+    @GetMapping("/votesMap/{votesMap}")
+    public HashMap<Candidate,String> getVoteCount(@PathVariable("votesMap") HashMap<Candidate,String> votesMap){
+        return ballotCollectorService.returnAllVotes(votesMap);
     }
 
     @GetMapping

@@ -21,9 +21,9 @@ public class BallotCollector {
     private String region;
 
     @Column
-    private HashMap<Candidate,Integer> votesMap;
+    private HashMap<Candidate,String> votesMap;
 
-    public BallotCollector(@JsonProperty("id") String id, @JsonProperty("region") String region, @JsonProperty("votesMap") HashMap<Candidate,Integer> votesMap) {
+    public BallotCollector(@JsonProperty("id") String id, @JsonProperty("region") String region, @JsonProperty("votesMap") HashMap<Candidate,String> votesMap) {
         this.id = id;
         this.region = region;
         this.votesMap = votesMap;
@@ -37,7 +37,7 @@ public class BallotCollector {
         return region;
     }
 
-	public HashMap<Candidate, Integer> getVotesMap() {
+	public HashMap<Candidate, String> getVotesMap() {
 		return votesMap;
 	}
 
@@ -49,7 +49,7 @@ public class BallotCollector {
 		this.region = region;
     }
     
-    public void setVotesMap(@NonNull HashMap<Candidate, Integer> votesMap) {
+    public void setVotesMap(@NonNull HashMap<Candidate, String> votesMap) {
 		this.votesMap = votesMap;
     }	
 
