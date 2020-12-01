@@ -1,6 +1,6 @@
 package candidate.controller;
 
-import entity.Candidate;
+import core.entity.Candidate;
 import candidate.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

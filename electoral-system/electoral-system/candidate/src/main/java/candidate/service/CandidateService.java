@@ -1,8 +1,8 @@
 package candidate.service;
 
-import entity.Candidate;
+import core.entity.Candidate;
 import candidate.repository.CandidateRepo;
-import exception.ApiRequestException;
+import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

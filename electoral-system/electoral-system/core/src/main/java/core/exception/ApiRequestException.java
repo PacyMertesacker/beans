@@ -1,4 +1,4 @@
-package exception;
+package core.exception;
 
 public class ApiRequestException extends RuntimeException {
     public ApiRequestException(String message) {

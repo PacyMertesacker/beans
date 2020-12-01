@@ -1,9 +1,8 @@
 package ballotCollector.entity;
 
 import java.util.HashMap;
-import entity.Candidate;
 import lombok.NonNull;
-
+import core.entity.Candidate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
