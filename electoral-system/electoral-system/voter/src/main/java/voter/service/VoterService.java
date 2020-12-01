@@ -2,7 +2,7 @@ package voter.service;
 
 import entity.Voter;
 import voter.repository.VoterRepo;
-import exception.ApiRequestException;
+import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
