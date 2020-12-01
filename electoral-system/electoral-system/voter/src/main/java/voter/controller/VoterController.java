@@ -1,6 +1,6 @@
 package voter.controller;
 
-import entity.Voter;
+import core.entity.Voter;
 import voter.service.VoterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
