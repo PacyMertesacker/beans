@@ -7,7 +7,7 @@ import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.Table;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Table
 public class BallotCollector {
@@ -22,9 +22,10 @@ public class BallotCollector {
     @Column
     private HashMap<Candidate,Integer> votesMap;
 
-    public BallotCollector(String id, String region) {
+    public BallotCollector(@JsonProperty("id") String id, @JsonProperty("region") String region, @JsonProperty("votesMap") HashMap<Candidate,Integer> votesMap) {
         this.id = id;
         this.region = region;
+        this.votesMap = votesMap;
     }
 
     public String getId() {
@@ -39,15 +40,15 @@ public class BallotCollector {
 		return votesMap;
 	}
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
-	public void setRegion(String region) {
+	public void setRegion(@NonNull String region) {
 		this.region = region;
     }
     
-    public void setVotesMap(HashMap<Candidate, Integer> votesMap) {
+    public void setVotesMap(@NonNull HashMap<Candidate, Integer> votesMap) {
 		this.votesMap = votesMap;
     }	
 
