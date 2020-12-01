@@ -55,5 +55,13 @@ public class VoterService {
     public void removeAllVoters() {
         voterRepo.deleteAll();
     }
+
+    public Voter updateHasVoted(String id, Voter voter){
+        voterRepo.findById(id).orElseThrow(() ->
+        new ApiRequestException("Cannot find member with this ID"));
+        voter.setHasVoted(true);
+        return voter;
+
+    }
     
 }

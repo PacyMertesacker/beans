@@ -35,8 +35,8 @@ public class VoterController {
     }
 
     @PutMapping("/id/{id}")
-    public Voter putVoterByID(@PathVariable("id") String id, @RequestBody Voter Voter) {
-        return voterService.replaceVoterByID(id, Voter);
+    public Voter putVoterByID(@PathVariable("id") String id, @RequestBody Voter voter) {
+        return voterService.replaceVoterByID(id, voter);
     }
 
     @DeleteMapping
@@ -52,6 +52,11 @@ public class VoterController {
     @DeleteMapping("/name/{name}")
     public Voter deleteVoterByName(@PathVariable("name") String name) {
         return voterService.removeVoterByName(name);
+    }
+
+    @PatchMapping("/id/{id}")
+    public Voter updateHasVoted(@PathVariable("id")String id,@RequestBody Voter voter){
+        return voterService.updateHasVoted(id, voter);
     }
     
 }
