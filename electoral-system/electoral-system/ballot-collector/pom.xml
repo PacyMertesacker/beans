@@ -39,6 +39,16 @@
 			<scope>test</scope>
 			<version>2.3.3.RELEASE</version>
 		</dependency>
+		<dependency>
+            <groupId>beans</groupId>
+            <artifactId>core</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+		<dependency>
+            <groupId>beans</groupId>
+            <artifactId>candidate</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -48,7 +58,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
-					<mainClass>BallotCollectorApplication</mainClass>
+					<mainClass>ballotCollector.BallotCollectorApplication</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
