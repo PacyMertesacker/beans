@@ -6,6 +6,7 @@ import lombok.NonNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BallotCollector {
     @NonNull
     @Id
+    @PrimaryKey
     private String id;
 
     @NonNull
