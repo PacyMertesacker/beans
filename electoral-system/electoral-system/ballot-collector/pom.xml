@@ -8,8 +8,8 @@
 
 	<properties>
 		<java.version>14</java.version>
-		<maven.compiler.source>14</maven.compiler.source>
-		<maven.compiler.target>14</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -44,7 +44,7 @@
             <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
-		<dependency>
+		<!-- <dependency>
             <groupId>beans</groupId>
             <artifactId>candidate</artifactId>
             <version>0.0.1</version>
@@ -53,7 +53,7 @@
             <groupId>beans</groupId>
             <artifactId>voter</artifactId>
             <version>0.0.1</version>
-        </dependency>
+        </dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
