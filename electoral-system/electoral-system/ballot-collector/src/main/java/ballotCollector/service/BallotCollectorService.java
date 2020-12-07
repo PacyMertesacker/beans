@@ -1,6 +1,5 @@
 package ballotCollector.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +7,11 @@ import org.springframework.stereotype.Service;
 
 import ballotCollector.entity.BallotCollector;
 import ballotCollector.repository.BallotCollectorRepo;
-import core.entity.Candidate;
 import core.exception.ApiRequestException;
 
 @Service
 public class BallotCollectorService {
     @Autowired BallotCollectorRepo BallotCollectorRepo;
-
-    /*@Autowired
-    public BallotCollectorService(@Qualifier("BallotCollectorRepo") BallotCollectorRepo BallotCollectorRepo) {
-        this.BallotCollectorRepo = BallotCollectorRepo;
-    }*/
 
     public BallotCollector addBallotCollector(BallotCollector BallotCollector) {
         if(!BallotCollectorRepo.existsByRegion(BallotCollector.getRegion()))
@@ -64,10 +57,5 @@ public class BallotCollectorService {
 
     public void removeAllBallotCollectors() {
         BallotCollectorRepo.deleteAll();
-    }
-
-	public HashMap<Candidate, String> returnAllVotes(HashMap<Candidate,String> votesMap) {
-        BallotCollectorRepo.countAll(votesMap);
-        return votesMap;
     }
 }
