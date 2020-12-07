@@ -1,20 +1,19 @@
 package ballotCollector.service;
 
-import ballotCollector.entity.BallotCollector;
-import ballotCollector.repository.BallotCollectorRepo;
-import voter.repository.*;
-import core.entity.Candidate;
-import core.exception.ApiRequestException;
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
+import ballotCollector.entity.BallotCollector;
+import ballotCollector.repository.BallotCollectorRepo;
+import core.entity.Candidate;
+import core.exception.ApiRequestException;
 
 @Service
 public class BallotCollectorService {
     @Autowired BallotCollectorRepo BallotCollectorRepo;
-    @Autowired VoterRepo voterRepo;
 
     /*@Autowired
     public BallotCollectorService(@Qualifier("BallotCollectorRepo") BallotCollectorRepo BallotCollectorRepo) {
@@ -70,8 +69,5 @@ public class BallotCollectorService {
 	public HashMap<Candidate, String> returnAllVotes(HashMap<Candidate,String> votesMap) {
         BallotCollectorRepo.countAll(votesMap);
         return votesMap;
-        
     }
-
-
 }
