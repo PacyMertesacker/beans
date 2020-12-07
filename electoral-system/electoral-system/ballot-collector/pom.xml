@@ -44,16 +44,6 @@
             <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
-		<!-- <dependency>
-            <groupId>beans</groupId>
-            <artifactId>candidate</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-		<dependency>
-            <groupId>beans</groupId>
-            <artifactId>voter</artifactId>
-            <version>0.0.1</version>
-        </dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
@@ -68,7 +58,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
-					<mainClass>ballotCollector.BallotCollectorApplication</mainClass>
+					<mainClass>BallotCollectorApplication</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
