@@ -45,7 +45,7 @@ public class CandidateService {
     }
 
     public List<Candidate> findAllCandidates() {
-        return candidateRepo.findAll();
+        return (List<Candidate>) candidateRepo.findAll();
     }
 
     public Candidate removeCandidateByID(String id) {

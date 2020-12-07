@@ -16,18 +16,19 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ballot-collector" target="14" />
-      <module name="candidate" target="14" />
-      <module name="core" target="14" />
+      <module name="ballot-collector" target="1.8" />
+      <module name="candidate" target="1.8" />
+      <module name="core" target="1.8" />
       <module name="electoral-system" target="1.5" />
-      <module name="information-hub" target="14" />
-      <module name="system-registration-manager" target="14" />
-      <module name="voter" target="14" />
+      <module name="information-hub" target="1.8" />
+      <module name="system-registration-manager" target="1.8" />
+      <module name="voter" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="electoral-system" options="" />
+      <module name="system-registration-manager" options="-parameters" />
     </option>
   </component>
 </project>
