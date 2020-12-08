@@ -8,13 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import core.exception.ApiRequestException;
-
-/**
- * Exception handle for customized exceptions to be used in Community Connect API.
- * @author Sean Ennis O'Toole
- */
-
 @ControllerAdvice
 public class ApiExceptionHandler {
 
