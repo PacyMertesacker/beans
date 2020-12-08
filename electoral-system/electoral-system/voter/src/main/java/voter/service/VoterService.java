@@ -4,8 +4,11 @@ import core.entity.Voter;
 import voter.repository.VoterRepo;
 import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+@Service
 public class VoterService {
     @Autowired VoterRepo voterRepo;
 
@@ -60,7 +63,12 @@ public class VoterService {
         new ApiRequestException("Cannot find member with this ID"));
         voter.setHasVoted(true);
         return voter;
-
     }
+
+    public Voter findByVoted(String votedFor){
+        return voterRepo.findByVotedFor(votedFor).orElseThrow(() ->
+        new ApiRequestException("Cannot find Voter with this ID"));
+    } 
+
     
 }

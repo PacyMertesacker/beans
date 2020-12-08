@@ -23,13 +23,16 @@ public class Voter{
     private String address;
     @Column
     private Boolean hasVoted;
+    @Column
+    private String votedFor;
 
     public Voter(@JsonProperty("name") String name, @JsonProperty("region") String region,
-    @JsonProperty("address") String address,@JsonProperty("hasVoted") Boolean hasVoted){
+    @JsonProperty("address") String address,@JsonProperty("hasVoted") Boolean hasVoted,@JsonProperty("votedFor")String votedFor){
         this.name = name;
         this.region = region;
         this.region = region;
         this.hasVoted = hasVoted;
+        this.votedFor = votedFor;
     }
     
     public String getId() {
@@ -72,9 +75,11 @@ public class Voter{
         this.hasVoted = hasVoted;
     }
 
-    @Override
-    public String toString() {
-        return String.format("{ id = %1$s \n name = %2$s \n region = %3$s \n address = %4$s}", getId(),
-                getName(), getRegion(), getAddress());
+    public String getVotedFor() {
+        return votedFor;
+    }
+
+    public void setVotedFor(@NonNull String votedFor) {
+        this.votedFor = votedFor;
     }
 }

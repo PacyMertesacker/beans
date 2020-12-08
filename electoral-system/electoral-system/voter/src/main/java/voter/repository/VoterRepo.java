@@ -12,7 +12,7 @@ public interface VoterRepo extends CassandraRepository<Voter, String> {
 
     boolean existsByName(String name);
 
-    Optional<Voter> findByHasVoted(Boolean hasVoted);
+    Optional<Voter> findByVotedFor(String votedFor);
 
     boolean existsByAddress(String address);
 

@@ -33,6 +33,11 @@ public class VoterController {
         return voterService.findVoterByName(name);
     }
 
+    @GetMapping("/votedFor/")
+    public Voter getVotedFor(@PathVariable("votedFor") String votedFor){
+        return voterService.findByVoted(votedFor);
+    }
+    
     @PutMapping("/id/{id}")
     public Voter putVoterByID(@PathVariable("id") String id, @RequestBody Voter voter) {
         return voterService.replaceVoterByID(id, voter);
