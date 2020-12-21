@@ -1,7 +1,6 @@
 package candidate.repository;
 
 import core.entity.Candidate;
-import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
