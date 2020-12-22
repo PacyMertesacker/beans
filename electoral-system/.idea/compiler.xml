@@ -29,7 +29,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ballot-collector" options="-parameters" />
       <module name="candidate" options="-parameters" />
-      <module name="core" options="-parameters" />
+      <module name="core" options="" />
       <module name="electoral-system" options="" />
       <module name="system-registration-manager" options="-parameters" />
       <module name="voter" options="-parameters" />
