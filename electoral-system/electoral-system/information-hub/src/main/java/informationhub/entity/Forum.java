@@ -19,7 +19,7 @@ public class Forum {
     @Id
     @PrimaryKey
     @Setter @Getter
-    private String index;
+    private String id;
 
     @NonNull
     @Column
@@ -36,14 +36,14 @@ public class Forum {
     @Setter @Getter
     private Timestamp messageTimestamp;
 
-    public Forum(@JsonProperty("index") String index, @JsonProperty("name") String name, 
+    public Forum(@JsonProperty("id") String id, @JsonProperty("name") String name, 
     @JsonProperty("message") String message) {
-        this.index = index;
+        this.id = id;
         this.name = name;
         this.message = message;
     }
 
     public String toString() {
-        return String.format("{ index = %1$s \n name = %2$s \n message = %3$s \n timestamp = %4$s}", index, name, message, messageTimestamp);
+        return String.format("{ id = %1$s \n name = %2$s \n message = %3$s \n timestamp = %4$s}", id, name, message, messageTimestamp);
     }
 }
