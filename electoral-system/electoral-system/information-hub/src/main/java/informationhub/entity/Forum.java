@@ -12,9 +12,10 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//import java.util.Comparable;
+
 @Table
-public class Forum {
-    //Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+public class Forum implements Comparable<Forum>{
     @NonNull
     @Id
     @PrimaryKey
@@ -36,12 +37,24 @@ public class Forum {
     @Setter @Getter
     private Timestamp messageTimestamp;
 
-    public Forum(@JsonProperty("id") String id, @JsonProperty("name") String name, 
+    public Forum(@JsonProperty("name") String name, 
     @JsonProperty("message") String message) {
-        this.id = id;
         this.name = name;
         this.message = message;
     }
+
+    public void setMessageDetails(String id, set messageTimestamp){
+        this.id = id;
+        this.messageTimestamp = messageTimestamp;
+    }
+
+    // Used for sorting messages in correct order of time.
+    @Override public int compareTo(Forum f) { 
+        if (this.getMessageTimestamp() == null || f.getMessageTimestamp() == null) { 
+          return 0; 
+        } 
+        return this.getMessageTimestamp().compareTo(f.getMessageTimestamp());
+      }
 
     public String toString() {
         return String.format("{ id = %1$s \n name = %2$s \n message = %3$s \n timestamp = %4$s}", id, name, message, messageTimestamp);

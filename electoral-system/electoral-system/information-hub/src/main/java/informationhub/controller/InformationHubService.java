@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,12 +26,15 @@ public class InformationHubService{
     @Autowired
     InformationHubRepo informationHubRepo;
 
+    static int messageId = 0;
+
     // Post a message in the forum
     @PostMapping("/forum")
     public ResponseEntity<Forum> postMessage(@RequestBody Forum forum){
         try{
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            forum.setMessageTimestamp(timestamp);
+            messageId++;
+            forum.setMessageDetails(messageId, timestamp);
             Forum messageInRepo = informationHubRepo.save(forum);
             return new ResponseEntity<>(messageInRepo, HttpStatus.CREATED);
         }
@@ -45,7 +49,7 @@ public class InformationHubService{
     public ResponseEntity<List<Forum>> viewForum(){
         try{
             List<Forum> forum = informationHubRepo.findAll();
-
+            Collections.sort(forum);
             if (!forum.isEmpty()){
                 return new ResponseEntity<>(forum, HttpStatus.CREATED);
             }
