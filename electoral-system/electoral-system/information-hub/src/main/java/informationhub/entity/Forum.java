@@ -20,7 +20,7 @@ public class Forum implements Comparable<Forum>{
     @Id
     @PrimaryKey
     @Setter @Getter
-    private String id;
+    private int id;
 
     @NonNull
     @Column
@@ -43,7 +43,7 @@ public class Forum implements Comparable<Forum>{
         this.message = message;
     }
 
-    public void setMessageDetails(String id, set messageTimestamp){
+    public void setMessageDetails(int id, Timestamp messageTimestamp){
         this.id = id;
         this.messageTimestamp = messageTimestamp;
     }

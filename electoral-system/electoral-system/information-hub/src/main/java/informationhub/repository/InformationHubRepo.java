@@ -10,6 +10,7 @@ import informationhub.entity.Forum;
 @Repository
 public interface InformationHubRepo extends CassandraRepository<Forum, String>{
     Optional<Forum> findByName(String name);
-    Optional<Forum> findById(String id);
-    Optional<Forum> findByIdAndName(String id, String name);
+    Optional<Forum> findById(int id);
+    Optional<Forum> findByIdAndName(int id, String name);
+    Optional<Forum> findByMessage(String message);
 }
