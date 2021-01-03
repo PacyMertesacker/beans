@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @RestController
 public class InformationHubService{
-    @Autowired
-    InformationHubRepo informationHubRepo;
+    @Autowired InformationHubRepo informationHubRepo;
+    @Autowired CandidateRegistrationRepo candidateRegistrationRepo;
 
     static int messageId = 0;
 
@@ -63,5 +63,23 @@ public class InformationHubService{
         }
     }
 
+    // Check if a candidate is registered
+    @PostMapping("/forum/candidate")
+    public ResponseEntity<String> registerCandidate(@RequestBody int id){
+        try{
+            Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(id);
+
+            if (candidate.isPresent()) {
+                return new ResponseEntity<>("The candidate "+candidate.get()+" already exists.", HttpStatus.CREATED);
+            }
+            else{
+                return new ResponseEntity<>("")
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
