@@ -33,11 +33,11 @@ public class VoterController {
         return voters;
     }
 
-    @PostMapping("/voter")
+    @PostMapping()
     public void test(){
         for(Voter voter : voters){
             HttpEntity<Voter> request = new HttpEntity<>(voter);
-            restTemplate.postForObject("http://localhost:8081/ballotcollector/voter",request, Voter.class);
+            restTemplate.postForObject("http://localhost:8081/ballotcollector/voter", request, Voter.class);
         }
     }
 

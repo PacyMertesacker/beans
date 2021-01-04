@@ -11,6 +11,9 @@ import java.util.List;
 @RequestMapping("/candidate")
 public class CandidateController {
 
+    @Autowired
+    RestTemplate restTemplate;
+
     public static final Candidate[] candidates = {
             new Candidate("Sean Ennis O'Toole", "PartyA", "Blah Blah Blah PartyA Blah Blah Blah"),
             new Candidate("Adam Shorten", "The Adam Party", "Will strengthen the Adam population"),
@@ -30,5 +33,13 @@ public class CandidateController {
     @GetMapping("/name")
     public Candidate[] getAllCandidate(@PathVariable("name") String name){
         return candidates;
+    }
+
+    @PostMapping()
+    public void test() {
+        for(Candidate candidate : candidates) {
+            HttpEntity<Voter> request = new HttpEntity<>(candidate);
+            restTemplate.postForObject("http://localhost:8081/ballotcollector/candidate", request, Candidate.class);
+        }
     }
 }
