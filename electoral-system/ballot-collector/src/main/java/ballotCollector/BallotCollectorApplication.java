@@ -11,5 +11,4 @@ public class BallotCollectorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BallotCollectorApplication.class, args);
 	}
-
 }
