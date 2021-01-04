@@ -1,12 +1,15 @@
-package candidate;
+package voter;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class CandidateApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(CandidateApplication.class, args);
-    }
+public class VoterApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(VoterApplication.class, args);
+	}
+
 }

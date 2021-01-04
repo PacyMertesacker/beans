@@ -1,9 +1,7 @@
 package informationhub.controller;
 
 import informationhub.entity.Forum;
-import informationhub.entity.CandidateRegistration;
 import informationhub.repository.InformationHubRepo;
-import informationhub.repository.CandidateRegistrationRepo;
 
 import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,8 @@ import java.util.Optional;
 
 @RestController
 public class InformationHubService{
-    @Autowired InformationHubRepo informationHubRepo;
-    @Autowired CandidateRegistrationRepo candidateRegistrationRepo;
+    @Autowired
+    InformationHubRepo informationHubRepo;
 
     static int messageId = 0;
 
@@ -65,61 +63,5 @@ public class InformationHubService{
         }
     }
 
-    // Check if a candidate is registered
-    @PostMapping("/forum/candidate/{id}")
-    public ResponseEntity<String> checkCandidate(@PathVariable int id){
-        try{
-            Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(id);
-
-            if (candidate.isPresent()) {
-                return new ResponseEntity<>(candidate.get().getName() +" is already registered.", HttpStatus.CREATED);
-            }
-            else {
-                return new ResponseEntity<>("This candidate does not exist yet, register them?", HttpStatus.CREATED);
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Register a candidate
-    @PostMapping("/forum/candidate/register")
-    public ResponseEntity<CandidateRegistration> registerCandidate(@RequestBody CandidateRegistration candidateRegistration){
-        try{
-            Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(candidateRegistration.getId());
-            if (!candidate.isPresent()) {
-                CandidateRegistration candidateInRepo = candidateRegistrationRepo.save(candidateRegistration);
-                return new ResponseEntity<>(candidateInRepo, HttpStatus.CREATED);            
-            }
-            else {
-                return new ResponseEntity<>(null, HttpStatus.CREATED);
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Return a list of all candidates currently registered:
-    @RequestMapping(value="/forum/candidates", method=RequestMethod.GET)
-    public ResponseEntity<List<CandidateRegistration>> getCandidates(){
-        try{
-            List<CandidateRegistration> candidateRegistration = candidateRegistrationRepo.findAll();
-            Collections.sort(candidateRegistration);
-            if (!candidateRegistration.isEmpty()){
-                return new ResponseEntity<>(candidateRegistration, HttpStatus.CREATED);
-            }
-            else{
-                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }
