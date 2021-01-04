@@ -14,6 +14,20 @@ import java.util.List;
 @RequestMapping("/voter")
 public class VoterController {
 
+    @GetMapping("/name/{name}")
+    public Voter getVoterByName(@PathVariable("name") String name){
+        for(Voter voter: voters)
+            if(voter.getName().equals(name))
+                return voter;
+        throw new ApiRequestException("No Voters found");
+    }
+
+    @GetMapping("/name")
+    public Voter[] getAllVotersByName(@PathVariable("name") String name)
+    {
+        return voters;
+    }
+
     public static final Voter[] voters = {
         new Voter("Luke Kelly", "Vin Diesel with hair", "D"),
         new Voter("Adam Shorten", "Vin Diesel", "B"),
@@ -116,20 +130,4 @@ public class VoterController {
         new Voter("Adam Shorten", "Vin Diesel", "B"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "D")
     };
-
-    @GetMapping("/name/{name}")
-    public Voter getVoterByName(@PathVariable("name") String name){
-        for(Voter voter: voters)
-            if(voter.getName().equals(name))
-                return voter;
-        throw new ApiRequestException("No Voters found");
-    }
-
-    @GetMapping("/name")
-    public Voter[] getAllVotersByName(@PathVariable("name") String name)
-    {
-        return voters;
-    }
-    
-    
 }
