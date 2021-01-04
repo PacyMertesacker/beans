@@ -11,50 +11,23 @@ import java.util.List;
 @RequestMapping("/candidate")
 public class CandidateController {
 
-    @Autowired CandidateService candidateService;
+    public static final Candidate[] candidates = {
+            new Candidate("Sean Ennis O'Toole", "PartyA", "Blah Blah Blah PartyA Blah Blah Blah"),
+            new Candidate("Adam Shorten", "The Adam Party", "Will strengthen the Adam population"),
+            new Candidate("Luke Murphy", "PartyB", "Blah Blah Blah PartyB Blah Blah Blah"),
+            new Candidate("Adam Waldron", "The Adam Party", "Will encourage cat owners to consider the name Adam for their pets"),
+            new Candidate("Ronan Kelly", "PartyC", "Blah Blah Blah PartyC Blah Blah Blah")
+    };
 
-   /* @Autowired
-    public CandidateController(@Qualifier("CandidateService") CandidateService candidateService) {
-        this.candidateService = candidateService;
-    }*/
-
-    @PostMapping
-    public Candidate postCandidate(@RequestBody Candidate candidate) {
-        return candidateService.addCandidate(candidate);
-    }
-
-    @GetMapping
-    public List<Candidate> getAllCandidates(){
-        return candidateService.findAllCandidates();
-    }
-
-    @GetMapping("/id/{id}")
-    public Candidate getCandidateByID(@PathVariable("id") String id){
-        return candidateService.findCandidateByID(id);
-    }
-
-    @GetMapping("/name/")
+    @GetMapping("/name/{name}")
     public Candidate getCandidateByName(@PathVariable("name") String name){
-        return candidateService.findCandidateByName(name);
+        for (Candidate candidate : candidates)
+            if (candidate.getName().equals(name))
+                return candidate;
     }
 
-    @PutMapping("/id/{id}")
-    public Candidate putCandidateByID(@PathVariable("id") String id, @RequestBody Candidate candidate) {
-        return candidateService.replaceCandidateByID(id, candidate);
-    }
-
-    @DeleteMapping
-    public void deleteAllCandidates() {
-        candidateService.removeAllCandidates();
-    }
-
-    @DeleteMapping("/id/{id}")
-    public Candidate deleteCandidateByID(@PathVariable("id") String id) {
-        return candidateService.removeCandidateByID(id);
-    }
-
-    @DeleteMapping("/name/{name}")
-    public Candidate deleteCandidateByName(@PathVariable("name") String name) {
-        return candidateService.removeCandidateByName(name);
+    @GetMapping("/name")
+    public Candidate getCandidateByName(@PathVariable("name") String name){
+        return candidates;
     }
 }
