@@ -12,7 +12,6 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-//import java.util.Comparable;
 
 @Table
 public class CandidateRegistration implements Comparable<CandidateRegistration>{
@@ -25,16 +24,24 @@ public class CandidateRegistration implements Comparable<CandidateRegistration>{
     @NonNull
     @Column
     @Setter @Getter
-    private Candidate candidate;
+    private String name;
 
-    public CandidateRegistration(@JsonProperty("id") int id, @JsonProperty("candidate_id") String candidate_id,
-    @JsonProperty("name") String name, @JsonProperty("party") String party,
-    @JsonProperty("bio") String bio) {
+    @NonNull
+    @Column
+    @Setter @Getter
+    private String party;
+
+    @NonNull
+    @Column
+    @Setter @Getter
+    private String manifesto;
+
+    public CandidateRegistration(@JsonProperty("id") int id, @JsonProperty("name") String name, 
+    @JsonProperty("party") String party, @JsonProperty("manifesto") String manifesto) {
         this.id = id;
-        candidate.setId(candidate_id);
-        candidate.setName(name);
-        candidate.setParty(party);
-        candidate.setBio(bio);
+        this.name = name;
+        this.party = party;
+        this.manifesto = manifesto;
     }
 
     // Used for sorting candidates by party.

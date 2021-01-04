@@ -66,8 +66,8 @@ public class InformationHubService{
     }
 
     // Check if a candidate is registered
-    @PostMapping("/forum/candidate")
-    public ResponseEntity<String> registerCandidate(@RequestBody Integer id){
+    @PostMapping("/forum/candidate/{id}")
+    public ResponseEntity<String> registerCandidate(@PathVariable int id){
         try{
             Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(id);
 
@@ -75,7 +75,7 @@ public class InformationHubService{
                 return new ResponseEntity<>("The candidate "+ candidate.get() +" already exists.", HttpStatus.CREATED);
             }
             else {
-                return new ResponseEntity<>(null, HttpStatus.CREATED);
+                return new ResponseEntity<>("This candidate does not exist yet, register them?", HttpStatus.CREATED);
             }
         }
         catch(Exception e){
