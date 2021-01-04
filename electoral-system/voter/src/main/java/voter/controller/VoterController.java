@@ -3,16 +3,22 @@ package voter.controller;
 import core.entity.Voter;
 import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/voter")
 public class VoterController {
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @GetMapping("/name/{name}")
     public Voter getVoterByName(@PathVariable("name") String name){
@@ -23,9 +29,16 @@ public class VoterController {
     }
 
     @GetMapping("/name")
-    public Voter[] getAllVotersByName(@PathVariable("name") String name)
-    {
+    public Voter[] getAllVotersByName(@PathVariable("name") String name){
         return voters;
+    }
+
+    @PostMapping("/voter")
+    public void test(){
+        for(Voter voter : voters){
+            HttpEntity<Voter> request = new HttpEntity<>(voter);
+            restTemplate.postForObject("http://localhost:8081/ballotcollector/voter",request, Voter.class);
+        }
     }
 
     public static final Voter[] voters = {

@@ -29,6 +29,7 @@ public class BallotCollectorController {
 
         currRegionMap.put(voter.getVotedFor(), ++numVotes);
         regionMap.put(voter.getRegion(), currRegionMap);
+        System.out.println(regionMap.toString());
     }
 
     public Integer test(String candidate, String region){
