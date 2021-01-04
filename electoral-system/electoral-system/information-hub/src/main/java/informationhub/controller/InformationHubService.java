@@ -66,7 +66,7 @@ public class InformationHubService{
     }
 
     // Check if a candidate is registered
-    @PostMapping("/forum/candidate/{id}")
+    @PostMapping("/forum/candidates/{id}")
     public ResponseEntity<String> checkCandidate(@PathVariable int id){
         try{
             Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(id);
@@ -85,7 +85,7 @@ public class InformationHubService{
     }
 
     // Register a candidate
-    @PostMapping("/forum/candidate/register")
+    @PostMapping("/forum/candidates/register")
     public ResponseEntity<CandidateRegistration> registerCandidate(@RequestBody CandidateRegistration candidateRegistration){
         try{
             Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(candidateRegistration.getId());
