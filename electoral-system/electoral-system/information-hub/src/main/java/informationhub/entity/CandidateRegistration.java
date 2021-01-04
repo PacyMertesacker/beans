@@ -25,31 +25,20 @@ public class CandidateRegistration implements Comparable<CandidateRegistration>{
     @NonNull
     @Column
     @Setter @Getter
-    private String name;
+    private Candidate candidate;
 
-    @NonNull
-    @Column
-    @Setter @Getter
-    private String party;
-
-    @NonNull
-    @Column
-    @Setter @Getter
-    private String manifesto;
-
-    public CandidateRegistration(@JsonProperty("id") String id, @JsonProperty("name") String name, 
-    @JsonProperty("party") String party, @JsonProperty("manifesto") String manifesto) {
+    public CandidateRegistration(@JsonProperty("id") int id, @JsonProperty("candidate_id") String candidate_id,
+    @JsonProperty("name") String name, @JsonProperty("party") String party,
+    @JsonProperty("bio") String bio) {
         this.id = id;
-        this.name = name;
-        this.part = party;
-        this.manifesto = manifesto;
+        candidate.setId(candidate_id);
+        candidate.setName(name);
+        candidate.setParty(party);
+        candidate.setBio(bio);
     }
 
-    public  registerCandidate
-
     // Used for sorting candidates by party.
-    @Override 
-    public int compareTo(CandidateRegistration cr) { 
+    @Override public int compareTo(CandidateRegistration cr) { 
         if (this.getParty() == null || cr.getParty() == null) { 
           return 0; 
         } 
@@ -57,6 +46,6 @@ public class CandidateRegistration implements Comparable<CandidateRegistration>{
       }
 
     public String toString() {
-        return String.format("{ id = %1$s \n name = %2$s \n message = %3$s \n timestamp = %4$s}", id, name, message, messageTimestamp);
+        return String.format("{ id = %1$s \n name = %2$s \n party = %3$s \n manifesto = %4$s}", id, name, party, manifesto);
     }
 }

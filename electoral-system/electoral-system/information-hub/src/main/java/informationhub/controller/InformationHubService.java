@@ -1,7 +1,9 @@
 package informationhub.controller;
 
 import informationhub.entity.Forum;
+import informationhub.entity.CandidateRegistration;
 import informationhub.repository.InformationHubRepo;
+import informationhub.repository.CandidateRegistrationRepo;
 
 import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,15 +67,15 @@ public class InformationHubService{
 
     // Check if a candidate is registered
     @PostMapping("/forum/candidate")
-    public ResponseEntity<String> registerCandidate(@RequestBody int id){
+    public ResponseEntity<String> registerCandidate(@RequestBody Integer id){
         try{
             Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(id);
 
             if (candidate.isPresent()) {
-                return new ResponseEntity<>("The candidate "+candidate.get()+" already exists.", HttpStatus.CREATED);
+                return new ResponseEntity<>("The candidate "+ candidate.get() +" already exists.", HttpStatus.CREATED);
             }
-            else{
-                return new ResponseEntity<>("")
+            else {
+                return new ResponseEntity<>(null, HttpStatus.CREATED);
             }
         }
         catch(Exception e){
