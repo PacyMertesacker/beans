@@ -1,9 +1,12 @@
 package voter.controller;
 
 import core.entity.Voter;
-
+import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -119,11 +122,11 @@ public class VoterController {
         for(Voter voter: voters)
             if(voter.getName().equals(name))
                 return voter;
-        
+        throw new ApiRequestException("No Voters found");
     }
 
     @GetMapping("/name")
-    public Voter getVotersByName(@PathVariable("name") String name)
+    public Voter[] getAllVotersByName(@PathVariable("name") String name)
     {
         return voters;
     }
