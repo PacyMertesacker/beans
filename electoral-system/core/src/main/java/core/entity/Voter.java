@@ -1,27 +1,35 @@
 package core.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.lang.NonNull;
 
+@Table
 public class Voter{
-  
-    private int id;
-  
+    @Id
+    @PrimaryKey  
+    private String id;
+    @NonNull
+    @Column
     private String name;
-
+    @Column
     private String votedFor;
-
+    @Column
     private String region;
 
-    public Voter( int id, String name, String votedFor, String region){
-        this.id= id;
+    public Voter( @JsonProperty("name")String name, @JsonProperty("votedFor")String votedFor, @JsonProperty("region")String region){
         this.name = name;
         this.votedFor = votedFor;
         this.region = region;
     }
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -29,7 +37,7 @@ public class Voter{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
@@ -37,7 +45,7 @@ public class Voter{
         return region;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(@NonNull String region) {
         this.region = region;
     }
 
@@ -45,7 +53,7 @@ public class Voter{
         return votedFor;
     }
 
-    public void setVotedFor(String votedFor) {
+    public void setVotedFor(@NonNull String votedFor) {
         this.votedFor = votedFor;
     }
 }
