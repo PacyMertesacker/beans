@@ -52,8 +52,4 @@ public class BallotCollector {
     public void setVotesMap(@NonNull HashMap<Candidate, String> votesMap) {
 		this.votesMap = votesMap;
     }	
-
-    public String toString() {
-        return String.format("{ id = %1$s \n region = %2$s }", getId(),getRegion() );
-    }
 }

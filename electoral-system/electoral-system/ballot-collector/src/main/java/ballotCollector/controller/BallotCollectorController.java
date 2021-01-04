@@ -1,68 +1,46 @@
 package ballotCollector.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import java.util.HashMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ballotCollector.entity.BallotCollector;
-import ballotCollector.service.BallotCollectorService;
-//import core.entity.Candidate;
+import core.entity.Voter;
 
 @RestController
 @RequestMapping("/ballotcollector")
 public class BallotCollectorController {
+    HashMap<String,HashMap<String,Integer>> regionMap = new HashMap<>();
 
-    @Autowired BallotCollectorService ballotCollectorService;
+    @PostMapping("/voter")
+    public void addVote(@RequestBody Voter voter) {
+        HashMap<String, Integer> currRegionMap = regionMap.get(voter.getRegion());
+        if(currRegionMap == null){
+            currRegionMap = new HashMap<String,Integer>(); 
+        }
 
-    @PostMapping
-    public BallotCollector postBallotCollector(@RequestBody BallotCollector ballotCollector) {
-        return ballotCollectorService.addBallotCollector(ballotCollector);
+        Integer numVotes = currRegionMap.get(voter.getVotedFor()); 
+        if(numVotes == null){
+            numVotes = 0;
+        }
+
+        currRegionMap.put(voter.getVotedFor(), ++numVotes);
+        regionMap.put(voter.getRegion(), currRegionMap);
     }
 
-    // @GetMapping("/votesMap/{votesMap}")
-    // public HashMap<Candidate,String> getVoteCount(@PathVariable("votesMap") HashMap<Candidate,String> votesMap){
-    //     return ballotCollectorService.returnAllVotes(votesMap);
-    // }
-
-    @GetMapping
-    public List<BallotCollector> getAllBallotCollectors(){
-        return ballotCollectorService.findAllBallotCollectors();
+    public Integer test(String candidate, String region){
+        HashMap<String, Integer> currRegionMap = regionMap.get(region);
+        Integer numVotes = currRegionMap.get(candidate); 
+        
+        return numVotes;
     }
 
-    @GetMapping("/id/{id}")
-    public BallotCollector getBallotCollectorByID(@PathVariable("id") String id){
-        return ballotCollectorService.findBallotCollectorByID(id);
-    }
-
-    @GetMapping("/Region/")
-    public BallotCollector getBallotCollectorByRegion(@PathVariable("region") String region){
-        return ballotCollectorService.findBallotCollectorByRegion(region);
-    }
-
-    @PutMapping("/id/{id}")
-    public BallotCollector putBallotCollectorByID(@PathVariable("id") String id, @RequestBody BallotCollector ballotCollector) {
-        return ballotCollectorService.replaceBallotCollectorByID(id, ballotCollector);
-    }
-
-    @DeleteMapping
-    public void deleteAllballotCollectors() {
-        ballotCollectorService.removeAllBallotCollectors();
-    }
-
-    @DeleteMapping("/id/{id}")
-    public BallotCollector deleteballotCollectorByID(@PathVariable("id") String id) {
-        return ballotCollectorService.removeBallotCollectorByID(id);
-    }
-
-    @DeleteMapping("/Region/{Region}")
-    public BallotCollector deleteballotCollectorByRegion(@PathVariable("region") String region) {
-        return ballotCollectorService.removeBallotCollectorByRegion(region);
+    @GetMapping("/test")
+    public ResponseEntity<Integer> test1(){
+        Integer votes = test("Vin Diesel", "A");
+        return new ResponseEntity<>(votes, HttpStatus.CREATED);
     }
 }
