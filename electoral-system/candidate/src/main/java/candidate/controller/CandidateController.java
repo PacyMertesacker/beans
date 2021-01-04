@@ -1,7 +1,7 @@
 package candidate.controller;
 
 import core.entity.Candidate;
-import candidate.service.CandidateService;
+import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +24,11 @@ public class CandidateController {
         for (Candidate candidate : candidates)
             if (candidate.getName().equals(name))
                 return candidate;
+        throw new ApiRequestException("No candidate by this name");
     }
 
     @GetMapping("/name")
-    public Candidate getCandidateByName(@PathVariable("name") String name){
+    public Candidate[] getAllCandidate(@PathVariable("name") String name){
         return candidates;
     }
 }
