@@ -63,7 +63,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
-					<mainClass>informationhub.InformationHubApplication</mainClass>
+					<mainClass>informationhub.Client</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
