@@ -19,20 +19,15 @@ public class Voter{
     private String name;
     @Column
     private String region;
-    @Column
-    private String address;
-    @Column
-    private Boolean hasVoted;
+   
     @Column
     private String votedFor;
 
     public Voter(@JsonProperty("name") String name, @JsonProperty("region") String region,
-    @JsonProperty("address") String address,@JsonProperty("hasVoted") Boolean hasVoted,@JsonProperty("votedFor")String votedFor){
+   @JsonProperty("votedFor")String votedFor){
         this.name = name;
-        this.region = region;
-        this.region = region;
-        this.hasVoted = hasVoted;
         this.votedFor = votedFor;
+        this.region = region;
     }
     
     public String getId() {
@@ -57,22 +52,6 @@ public class Voter{
 
     public void setRegion(@NonNull String region) {
         this.region = region;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(@NonNull String address) {
-        this.address = address;
-    }
-
-    public Boolean getHasVoted(){
-        return hasVoted;
-    }
-
-    public void setHasVoted(@NonNull Boolean hasVoted){
-        this.hasVoted = hasVoted;
     }
 
     public String getVotedFor() {
