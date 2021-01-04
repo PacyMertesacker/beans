@@ -1,15 +1,32 @@
 package voter.controller;
 
 import core.entity.Voter;
-
+import core.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/voter")
 public class VoterController {
+
+    @GetMapping("/name/{name}")
+    public Voter getVoterByName(@PathVariable("name") String name){
+        for(Voter voter: voters)
+            if(voter.getName().equals(name))
+                return voter;
+        throw new ApiRequestException("No Voters found");
+    }
+
+    @GetMapping("/name")
+    public Voter[] getAllVotersByName(@PathVariable("name") String name)
+    {
+        return voters;
+    }
 
     public static final Voter[] voters = {
         new Voter("Luke Kelly", "Vin Diesel with hair", "D"),
@@ -113,20 +130,4 @@ public class VoterController {
         new Voter("Adam Shorten", "Vin Diesel", "B"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "D")
     };
-
-    @GetMapping("/name/{name}")
-    public Voter getVoterByName(@PathVariable("name") String name){
-        for(Voter voter: voters)
-            if(voter.getName().equals(name))
-                return voter;
-        
-    }
-
-    @GetMapping("/name")
-    public Voter getVotersByName(@PathVariable("name") String name)
-    {
-        return voters;
-    }
-    
-    
 }
