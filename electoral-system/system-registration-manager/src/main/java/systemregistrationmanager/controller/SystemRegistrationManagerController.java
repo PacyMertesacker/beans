@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.ArrayList;
 
 import core.entity.Votes;
 
@@ -61,6 +62,8 @@ public class SystemRegistrationManagerController {
     public void printResults() {
         String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
 
+        List<String> results = new ArrayList<>();
+
         for (String candidate : candidates) {
             Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
 
@@ -72,6 +75,8 @@ public class SystemRegistrationManagerController {
                 numOfVotes += vote.getNumOfVotes();
             }
             System.out.println(candidate + " : " + numOfVotes);
+            results.add(candidate + " : " + numOfVotes);
         }
+        
     }
 }
