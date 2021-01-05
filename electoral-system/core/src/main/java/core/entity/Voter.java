@@ -1,6 +1,5 @@
 package core.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -23,8 +22,8 @@ public class Voter{
     @Column
     private String votedFor;
 
-    public Voter(@JsonProperty("name") String name, @JsonProperty("region") String region,
-   @JsonProperty("votedFor")String votedFor){
+    public Voter(@JsonProperty("name") String name,
+   @JsonProperty("votedFor")String votedFor, @JsonProperty("region") String region){
         this.name = name;
         this.votedFor = votedFor;
         this.region = region;

@@ -19,18 +19,17 @@ public class BallotCollectorControllerA {
 
     @PostMapping("/voter")
     public void addVote(@RequestBody Voter voter) {
-        // only count vote if it is valid
-        if(candidates.contains(voter.getVotedFor())) {
-            // only count votes for current region
-            if(voter.getRegion().equals("A")) {
-                Integer numVotes = voteMap.get(voter.getVotedFor());
-                if (numVotes == null) {
-                    numVotes = 0;
-                }
-
-                voteMap.put(voter.getVotedFor(), ++numVotes);
+        // only count votes for current region
+        if(voter.getRegion().equals("A")) {
+            Integer numVotes = voteMap.get(voter.getVotedFor());
+            if (numVotes == null) {
+                numVotes = 0;
             }
+
+            voteMap.put(voter.getVotedFor(), ++numVotes);
+            System.out.println(voteMap.toString());
         }
+        
     }
 
     @PostMapping()
