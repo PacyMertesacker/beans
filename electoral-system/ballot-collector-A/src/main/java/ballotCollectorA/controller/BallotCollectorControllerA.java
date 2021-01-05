@@ -32,7 +32,7 @@ public class BallotCollectorControllerA {
         
     }
 
-    @PostMapping()
+    @GetMapping()
     public void postToSysRegMan(){
         HashMap<String,HashMap<String, Integer>> regionalBallots = new HashMap<>();
         regionalBallots.put("A", voteMap);

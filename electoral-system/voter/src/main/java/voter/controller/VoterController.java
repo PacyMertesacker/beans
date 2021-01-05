@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/voter")
 public class VoterController {
@@ -43,9 +45,9 @@ public class VoterController {
                 host = "http://localhost:8084/ballotcollectorB/voter";
             }
             restTemplate.postForObject(host, request, Voter.class);
-
         }
-
+        restTemplate.getForObject("http://localhost:8081/ballotcollectorA", HashMap.class);
+        restTemplate.getForObject("http://localhost:8084/ballotcollectorB", HashMap.class);
     }
 
     public static final Voter[] voters = {
