@@ -41,10 +41,7 @@ public class BallotCollectorController {
             }
 
             repo.save(votes);
-        } else {
-            System.out.println("|"+ candidates.get(0) +"|");
-            System.out.println("|"+ candidates.get(1) +"|");
-        }
+        } 
     }
 
     public Integer test(String candidate, String region){
