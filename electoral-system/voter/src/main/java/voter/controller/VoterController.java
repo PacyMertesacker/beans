@@ -34,8 +34,14 @@ public class VoterController {
     @PostMapping()
     public void test(){
         for(Voter voter : voters){
+            
             HttpEntity<Voter> request = new HttpEntity<>(voter);
-            restTemplate.postForObject("http://localhost:8081/ballotcollector/voter", request, Voter.class);
+            if(voter.getRegion().equals("A")){
+                restTemplate.postForObject("http://localhost:8081/ballotcollectorA/voter", request, Voter.class);
+            }
+            else if(voter.getRegion().equals("B")){
+                restTemplate.postForObject("http://localhost:8084/ballotcollectorB/voter", request, Voter.class);
+            }
         }
     }
 
