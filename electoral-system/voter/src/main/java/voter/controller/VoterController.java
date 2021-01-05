@@ -16,6 +16,7 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/voter")
 public class VoterController {
+    int numThreads = 2;
 
     @Autowired
     RestTemplate restTemplate;
@@ -36,8 +37,20 @@ public class VoterController {
     @PostMapping("/test")
     public void test(){
 
-        new Thread(() -> sendVotes("A")).start();
-        new Thread(() -> sendVotes("B")).start();
+        for (Voter voter : voters) {
+            HttpEntity<Voter> request = new HttpEntity<>(voter);
+            String host = "http://localhost:8083/ballotcollector/voter";
+            restTemplate.postForObject(host, request, Voter.class);
+        }
+
+        // for (int i = 0;i < numThreads;i++) {
+        //     final int index = i;
+        //     System.out.println(index);
+        //     new Thread(() -> sendVotes(index)).start();
+        // }
+
+        // new Thread(() -> sendVotes("A")).start();
+        // new Thread(() -> sendVotes("B")).start();
 
         try {
             Thread.sleep(2000);
@@ -62,14 +75,22 @@ public class VoterController {
         // restTemplate.getForObject("http://localhost:8084/ballotcollectorB", HashMap.class);
     }
 
-    private void sendVotes(String region) {
-        for(Voter voter : voters){
-            HttpEntity<Voter> request = new HttpEntity<>(voter);
-            String host = "";
-            if(voter.getRegion() == region){
-                host = "http://localhost:8083/ballotcollector/voter";
-                restTemplate.postForObject(host, request, Voter.class);
-            }
+    private void sendVotes(int index) {
+        int unit = voters.length / numThreads;
+
+        int secStart, secEnd;
+
+        secStart = index * unit;
+        secEnd = secStart + unit;
+
+        if (index == numThreads - 1) {
+            secEnd = voters.length;
+        }
+
+        for (int i = secStart;i < secEnd;i++) {
+            HttpEntity<Voter> request = new HttpEntity<>(voters[i]);
+            String host = "http://localhost:8083/ballotcollector/voter";
+            restTemplate.postForObject(host, request, Voter.class);
         }
     }
 
