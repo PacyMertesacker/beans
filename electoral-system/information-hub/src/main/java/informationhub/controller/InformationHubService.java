@@ -1,6 +1,7 @@
 package informationhub.controller;
 
 import core.entity.Candidate;
+import core.entity.Votes;
 import informationhub.entity.Forum;
 import informationhub.entity.CandidateRegistration;
 import informationhub.repository.InformationHubRepo;
@@ -49,24 +50,7 @@ public class InformationHubService{
         }
     }
 
-    // Get all messages in the forum
-    @RequestMapping(value="/forum/view", method=RequestMethod.GET)
-    public ResponseEntity<List<Forum>> viewForum(){
-        try{
-            List<Forum> forum = informationHubRepo.findAll();
-            Collections.sort(forum);
-            if (!forum.isEmpty()){
-                return new ResponseEntity<>(forum, HttpStatus.CREATED);
-            }
-            else{
-                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 
     // Check if a candidate is registered
     @PostMapping("/forum/candidates/{id}")
@@ -89,10 +73,11 @@ public class InformationHubService{
 
     // Register a candidate
     @PostMapping("/forum/candidates/register")
-    public ResponseEntity<CandidateRegistration> registerCandidate(@RequestBody CandidateRegistration candidateRegistration){
+    public ResponseEntity<CandidateRegistration> registerCandidate(@RequestBody Candidate candidate){
         try{
-            Optional<CandidateRegistration> candidate = candidateRegistrationRepo.findById(candidateRegistration.getId());
-            if (!candidate.isPresent()) {
+            CandidateRegistration candidateRegistration = convertToCandidateRegistration(candidate);
+            Optional<CandidateRegistration> candidateReg = candidateRegistrationRepo.findById(candidateRegistration.getId());
+            if (!candidateReg.isPresent()) {
                 CandidateRegistration candidateInRepo = candidateRegistrationRepo.save(candidateRegistration);
                 return new ResponseEntity<>(candidateInRepo, HttpStatus.CREATED);            
             }
