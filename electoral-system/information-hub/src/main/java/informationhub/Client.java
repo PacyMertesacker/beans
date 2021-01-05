@@ -3,7 +3,6 @@ package informationhub;
 import informationhub.entity.CandidateRegistration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 
