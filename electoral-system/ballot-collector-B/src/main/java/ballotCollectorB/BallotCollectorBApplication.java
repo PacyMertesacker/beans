@@ -11,4 +11,9 @@ public class BallotCollectorBApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BallotCollectorBApplication.class, args);
 	}
+
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 }

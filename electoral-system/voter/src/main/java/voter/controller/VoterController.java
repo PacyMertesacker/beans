@@ -37,6 +37,7 @@ public class VoterController {
             HttpEntity<Voter> request = new HttpEntity<>(voter);
             restTemplate.postForObject("http://localhost:8081/ballotcollector/voter", request, Voter.class);
         }
+
     }
 
     public static final Voter[] voters = {

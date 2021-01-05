@@ -19,11 +19,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
+import java.util.HashMap;
 
 @RestController
+@RequestMapping("/SysRegMan")
 public class Main {
     @Autowired 
     SystemRegistrationManagerRepo repo;
+
+    // TODO store in Cassandra
+    HashMap<String, Integer> regionalBallots = new HashMap<>();
+
+    @PostMapping()
+    public void addBallots(@RequestBody HashMap<String, HashMap<String, Integer>> regionalBallot) {
+        this.regionalBallots = regionalBallot;
+    }
 
     @PostMapping("/managers")
     public ResponseEntity<Manager> createManager(@RequestBody Manager manager) {

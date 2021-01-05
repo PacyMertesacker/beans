@@ -1,4 +1,4 @@
-package ballotCollector;
+package ballotCollectorA;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,5 +10,10 @@ public class BallotCollectorApplicationA {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BallotCollectorApplicationA.class, args);
+	}
+
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }

@@ -1,4 +1,4 @@
-package ballotCollector.controller;
+package ballotCollectorA.controller;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -11,6 +11,9 @@ import core.entity.Voter;
 @RestController
 @RequestMapping("/ballotcollectorA")
 public class BallotCollectorControllerA {
+    @Autowired
+    RestTemplate restTemplate;
+
     HashMap<String,Integer> voteMap = new HashMap<>();
     ArrayList<String> candidates = new ArrayList<>();
 
@@ -28,6 +31,15 @@ public class BallotCollectorControllerA {
                 voteMap.put(voter.getVotedFor(), ++numVotes);
             }
         }
+    }
+
+    @PostMapping()
+    public void postToSysRegMan(){
+        HashMap<String,HashMap<String, Integer>> regionalBallots = new HashMap<>();
+        regionalBallots.put("A", voteMap);
+        HttpEntity<HashMap<String,HashMap<String, Integer>>> request =
+                new HttpEntity<>(regionalBallots);
+        restTemplate.postForObject("http://localhost:8085/SysRegMan", request, HashMap.class);
     }
 
   /*  public Integer test(String candidate, String region){
