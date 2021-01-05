@@ -28,11 +28,12 @@ public class Main {
     SystemRegistrationManagerRepo repo;
 
     // TODO store in Cassandra
-    HashMap<String, Integer> regionalBallots = new HashMap<>();
+    HashMap<String, HashMap<String, Integer>> regionalBallots = new HashMap<>();
 
     @PostMapping()
     public void addBallots(@RequestBody HashMap<String, HashMap<String, Integer>> regionalBallot) {
         this.regionalBallots = regionalBallot;
+        System.out.println(regionalBallot.toString());
     }
 
     @PostMapping("/managers")
