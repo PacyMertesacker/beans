@@ -2,7 +2,11 @@ package candidate.controller;
 
 import core.entity.Candidate;
 import core.exception.ApiRequestException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 
 @RestController
@@ -33,8 +37,8 @@ public class CandidateController {
     @PostMapping()
     public void test() {
         for(Candidate candidate : candidates) {
-            HttpEntity<Voter> request = new HttpEntity<>(candidate);
-            restTemplate.postForObject("http://localhost:8081/ballotcollector/candidate", request, Candidate.class);
+            HttpEntity<String> request = new HttpEntity<>(candidate.getName());
+            restTemplate.postForObject("http://localhost:8081/ballotcollector/candidate", request, String.class);
         }
     }
 }
