@@ -31,17 +31,19 @@ public class VoterController {
         return voters;
     }
 
-    @PostMapping()
+    @PostMapping("/test")
     public void test(){
         for(Voter voter : voters){
-            
             HttpEntity<Voter> request = new HttpEntity<>(voter);
-            if(voter.getRegion().equals("A")){
-                restTemplate.postForObject("http://localhost:8081/ballotcollectorA/voter", request, Voter.class);
+            String host = "";
+            if(voter.getRegion() == "A"){
+                host = "http://localhost:8081/ballotcollectorA/voter";
             }
-            else if(voter.getRegion().equals("B")){
-                restTemplate.postForObject("http://localhost:8084/ballotcollectorB/voter", request, Voter.class);
+            else if(voter.getRegion() == "B"){
+                host = "http://localhost:8084/ballotcollectorB/voter";
             }
+            restTemplate.postForObject(host, request, Voter.class);
+
         }
     }
 
@@ -59,9 +61,9 @@ public class VoterController {
         new Voter("Ronan Shorten", "Vin Diesel", "B"),
         new Voter("Adam Shorten", "Vin Diesel", "B"),
         new Voter("Luke O Toole", "Vin Diesel", "A"),
-        new Voter("Adam Shorten", "Vin Diesel with hair", "C"),
+        new Voter("Adam Shorten", "Vin Diesel with hair", "A"),
         new Voter("Ronan Murphy", "Vin Diesel with hair", "A"),
-        new Voter("Adam Waldron", "Vin Diesel", "C"),
+        new Voter("Adam Waldron", "Vin Diesel", "B"),
         new Voter("Adam Murphy", "Vin Diesel", "B"),
         new Voter("Luke Shorten", "Vin Diesel with hair", "A"),
         new Voter("Ronan Waldron", "Vin Diesel with hair", "A"),
@@ -70,28 +72,28 @@ public class VoterController {
         new Voter("Adam O Toole", "Vin Diesel with hair", "A"),
         new Voter("Sean Murphy", "Vin Diesel with hair", "A"),
         new Voter("Luke Kelly", "Vin Diesel", "B"),
-        new Voter("Adam Murphy", "Vin Diesel", "C"),
-        new Voter("Adam Waldron", "Vin Diesel with hair", "C"),
+        new Voter("Adam Murphy", "Vin Diesel", "B"),
+        new Voter("Adam Waldron", "Vin Diesel with hair", "B"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "A"),
         new Voter("Ronan Murphy", "Vin Diesel", "B"),
         new Voter("Sean Shorten", "Vin Diesel with hair", "B"),
         new Voter("Luke O Toole", "Vin Diesel", "B"),
-        new Voter("Adam Murphy", "Vin Diesel with hair", "C"),
+        new Voter("Adam Murphy", "Vin Diesel with hair", "B"),
         new Voter("Sean Shorten", "Vin Diesel with hair", "A"),
-        new Voter("Luke Murphy", "Vin Diesel", "C"),
+        new Voter("Luke Murphy", "Vin Diesel", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "A"),
         new Voter("Luke O Toole", "Vin Diesel", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "A"),
         new Voter("Adam Waldron", "Vin Diesel with hair", "A"),
-        new Voter("Luke Murphy", "Vin Diesel with hair", "C"),
-        new Voter("Adam Murphy", "Vin Diesel with hair", "C"),
-        new Voter("Luke Waldron", "Vin Diesel with hair", "C"),
+        new Voter("Luke Murphy", "Vin Diesel with hair", "B"),
+        new Voter("Adam Murphy", "Vin Diesel with hair", "B"),
+        new Voter("Luke Waldron", "Vin Diesel with hair", "B"),
         new Voter("Ronan Waldron", "Vin Diesel with hair", "B"),
         new Voter("Adam Kelly", "Vin Diesel", "A"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "B"),
         new Voter("Ronan Murphy", "Vin Diesel", "A"),
-        new Voter("Sean Kelly", "Vin Diesel with hair", "C"),
-        new Voter("Ronan Murphy", "Vin Diesel with hair", "C"),
+        new Voter("Sean Kelly", "Vin Diesel with hair", "B"),
+        new Voter("Ronan Murphy", "Vin Diesel with hair", "B"),
         new Voter("Luke Waldron", "Vin Diesel", "A"),
         new Voter("Luke Kelly", "Vin Diesel with hair", "B"),
         new Voter("Adam Shorten", "Vin Diesel", "A"),
@@ -100,12 +102,12 @@ public class VoterController {
         new Voter("Adam O Toole", "Vin Diesel with hair", "A"),
         new Voter("Adam Waldron", "Vin Diesel with hair", "B"),
         new Voter("Luke O Toole", "Vin Diesel", "B"),
-        new Voter("Adam Murphy", "Vin Diesel with hair", "C"),
+        new Voter("Adam Murphy", "Vin Diesel with hair", "B"),
         new Voter("Luke Murphy", "Vin Diesel", "A"),
-        new Voter("Luke Murphy", "Vin Diesel with hair", "C"),
+        new Voter("Luke Murphy", "Vin Diesel with hair", "B"),
         new Voter("Sean O Toole", "Vin Diesel", "A"),
-        new Voter("Luke Shorten", "Vin Diesel with hair", "C"),
-        new Voter("Ronan O Toole", "Vin Diesel", "C"),
+        new Voter("Luke Shorten", "Vin Diesel with hair", "B"),
+        new Voter("Ronan O Toole", "Vin Diesel", "B"),
         new Voter("Adam Murphy", "Vin Diesel", "B"),
         new Voter("Sean Kelly", "Vin Diesel", "B"),
         new Voter("Adam Shorten", "Vin Diesel", "A"),
@@ -117,31 +119,31 @@ public class VoterController {
         new Voter("Adam Kelly", "Vin Diesel with hair", "A"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "A"),
         new Voter("Luke Murphy", "Vin Diesel with hair", "A"),
-        new Voter("Sean Kelly", "Vin Diesel with hair", "C"),
+        new Voter("Sean Kelly", "Vin Diesel with hair", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "A"),
         new Voter("Sean Shorten", "Vin Diesel", "A"),
         new Voter("Adam Murphy", "Vin Diesel with hair", "A"),
         new Voter("Ronan Murphy", "Vin Diesel with hair", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "B"),
-        new Voter("Adam Shorten", "Vin Diesel", "C"),
+        new Voter("Adam Shorten", "Vin Diesel", "B"),
         new Voter("Sean O Toole", "Vin Diesel with hair", "A"),
         new Voter("Adam O Toole", "Vin Diesel", "A"),
-        new Voter("Ronan Waldron", "Vin Diesel with hair", "C"),
+        new Voter("Ronan Waldron", "Vin Diesel with hair", "B"),
         new Voter("Adam Kelly", "Vin Diesel with hair", "B"),
         new Voter("Adam Shorten", "Vin Diesel", "B"),
         new Voter("Adam Murphy", "Vin Diesel with hair", "B"),
-        new Voter("Adam Murphy", "Vin Diesel with hair", "C"),
+        new Voter("Adam Murphy", "Vin Diesel with hair", "B"),
         new Voter("Ronan O Toole", "Vin Diesel", "A"),
-        new Voter("Luke Kelly", "Vin Diesel", "C"),
+        new Voter("Luke Kelly", "Vin Diesel", "B"),
         new Voter("Sean Murphy", "Vin Diesel", "A"),
         new Voter("Sean Kelly", "Vin Diesel", "B"),
         new Voter("Adam Shorten", "Vin Diesel with hair", "A"),
         new Voter("Luke Kelly", "Vin Diesel", "A"),
         new Voter("Adam Waldron", "Vin Diesel", "B"),
-        new Voter("Adam Waldron", "Vin Diesel", "C"),
+        new Voter("Adam Waldron", "Vin Diesel", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "A"),
-        new Voter("Adam Murphy", "Vin Diesel", "C"),
-        new Voter("Adam Kelly", "Vin Diesel with hair", "C"),
+        new Voter("Adam Murphy", "Vin Diesel", "B"),
+        new Voter("Adam Kelly", "Vin Diesel with hair", "B"),
         new Voter("Adam Waldron", "Vin Diesel", "A"),
         new Voter("Luke Kelly", "Vin Diesel with hair", "A"),
         new Voter("Adam Shorten", "Vin Diesel", "B"),
