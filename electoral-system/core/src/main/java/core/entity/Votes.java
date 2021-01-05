@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.Getter;
 
 @Table
-public class Votes {
+public class Votes{
     @NonNull
     @PrimaryKey
     @Column
@@ -38,4 +38,6 @@ public class Votes {
         this.region = region;
         this.numOfVotes = numOfVotes;
     }
+
+
 }

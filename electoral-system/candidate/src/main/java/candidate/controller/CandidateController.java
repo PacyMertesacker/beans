@@ -21,11 +21,32 @@ public class CandidateController {
             new Candidate("Vin Diesel", "FastAndFurious", "waddyamean"),
     };
 
+    // Register a candidate in the CandidateRegistration table from either local data or a RequestBody
+    @PostMapping("/register")
+    public void storeCandidate(@RequestBody Candidate candidate){
+        try{
+            if (candidates.length > 0) {
+                for (Candidate c : candidates){
+                    HttpEntity<Candidate> candidateHttp = new HttpEntity<>(c);
+                    restTemplate.postForEntity("http://localhost:8050/forum/candidates/register", candidateHttp, Candidate.class);
+                }
+            }
+            else {
+                HttpEntity<Candidate> candidateHttp = new HttpEntity<>(candidate);
+                restTemplate.postForEntity("http://localhost:8050/forum/candidates/register", candidateHttp, Candidate.class);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @GetMapping("/name/{name}")
     public Candidate getCandidateByName(@PathVariable("name") String name){
-        for (Candidate candidate : candidates)
+        for (Candidate candidate : candidates){
             if (candidate.getName().equals(name))
                 return candidate;
+        }
         throw new ApiRequestException("No candidate by this name");
     }
 
