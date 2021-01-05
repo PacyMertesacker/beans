@@ -2,12 +2,10 @@ package informationhub.controller;
 
 import core.entity.Candidate;
 import core.entity.Votes;
-import informationhub.entity.Forum;
 import informationhub.entity.CandidateRegistration;
 import informationhub.repository.InformationHubRepo;
 import informationhub.repository.CandidateRegistrationRepo;
 
-import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,18 +34,25 @@ public class InformationHubService{
     static int candidateId = 0;
 
     // Post a message in the forum
-    @PostMapping("/forum")
-    public ResponseEntity<Forum> postMessage(@RequestBody Forum forum){
+    @PostMapping("/forum/results")
+    public void viewFinal(@RequestBody List<Votes> votes){
         try{
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            //messageId++;
-            //forum.setMessageDetails(messageId, timestamp);
-            Forum messageInRepo = informationHubRepo.save(forum);
-            return new ResponseEntity<>(messageInRepo, HttpStatus.CREATED);
+            Collections.sort(votes,
+            Comparator.comparingInt(Votes::getNumOfVotes).reversed());
+            Votes winner = votes.remove(0);
+            System.out.println("|=================================================================================================================");
+            System.out.println("|\t\t\tElection Results");
+            System.out.println("|=================================================================================================================");
+            System.out.println("|                                                                                                               ");
+            System.out.println("|\t\t\tCandidate "+winner.getCandidate()+" has won the election with "+winner.getNumOfVotes());
+            System.out.println("|=================================================================================================================");
+            for (Votes v : votes){
+                System.out.println("| Candidate "+v.getCandidate()+" next with "+v.getNumOfVotes()+".");
+            } 
+            System.out.println("|=================================================================================================================");
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -76,6 +82,7 @@ public class InformationHubService{
             CandidateRegistration candidateRegistration = convertToCandidateRegistration(candidate);
             Optional<CandidateRegistration> candidateAlreadyExists = candidateRegistrationRepo.findByNameAndParty(candidateRegistration.getName(), candidateRegistration.getParty());
             if (!candidateAlreadyExists.isPresent()) {
+                candidateId++;
                 CandidateRegistration candidateInRepo = candidateRegistrationRepo.save(candidateRegistration);
                 return new ResponseEntity<>(candidateInRepo, HttpStatus.CREATED);            
             }
@@ -107,7 +114,6 @@ public class InformationHubService{
     }
 
     public CandidateRegistration convertToCandidateRegistration(Candidate c){
-        candidateId++;
         return new CandidateRegistration(candidateId,c.getName(),c.getParty(),c.getBio());
     }
 
@@ -115,11 +121,11 @@ public class InformationHubService{
 		System.out.println("|=================================================================================================================");
 		System.out.println("|                                                                                                               ");
 		System.out.println(
+                "| Party: \n|\t" + String.format("%1$-31s", cr.getParty()) + "\n" +
 				"| Name: \n|\t" + String.format("%1$-31s", cr.getName()) + "\n" +
-				"| Party: \n|\t" + String.format("%1$-31s", cr.getParty()) + "\n" +
 				"| Manifesto: \n|\t" + String.format("%1$-31s", cr.getManifesto())+" ");
 		System.out.println("|                                                                                                               ");
 		System.out.println("|=================================================================================================================");
-	}
-
+    }
+    
 }
