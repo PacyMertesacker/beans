@@ -39,4 +39,12 @@ public class Votes{
         this.numOfVotes = numOfVotes;
     }
 
+    public int getNumOfVotes() {
+        return numOfVotes;
+    }
+
+    public void setNumOfVotes(int numOfVotes) {
+        this.numOfVotes = numOfVotes;
+    }
+
 }
