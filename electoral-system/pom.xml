@@ -13,7 +13,8 @@
 		<module>system-registration-manager</module>
 		<module>information-hub</module>
 		<module>candidate</module>
-		<module>ballot-collector</module>
+		<module>ballot-collector-A</module>
+		<module>ballot-collector-B</module>
 		<module>core</module>
 	</modules>
 </project>
