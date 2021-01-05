@@ -1,16 +1,34 @@
 version: '3'
+
+networks:
+  cassandra-network:
+    driver: bridge
+
 services:
+  cassandra:
+    image: cassandra:latest
+    networks:
+      - cassandra-network
+
   ballot-collector:
     build: ballot-collector
+    networks:
+      - cassandra-network
 
   candidate:
     build: candidate
+    networks:
+      - cassandra-network
 
   information-hub:
     build: information-hub
+    networks:
+      - cassandra-network
 
   system-registration-manager:
     build: system-registration-manager
+    networks:
+      - cassandra-network
 
   voter:
     build: voter
