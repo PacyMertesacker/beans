@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import core.entity.Votes;
 
-
-
 @Repository
 public interface SystemRegistrationManagerRepo extends CassandraRepository<Votes, String>{
     @AllowFiltering

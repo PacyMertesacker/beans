@@ -34,7 +34,7 @@ public class VoterController {
         return voters;
     }
 
-    @PostMapping("/test")
+    @GetMapping("/test")
     public void test(){
 
         for (Voter voter : voters) {

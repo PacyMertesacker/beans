@@ -35,19 +35,23 @@ public class InformationHubService{
 
     // Post a message in the forum
     @PostMapping("/forum/results")
-    public void viewFinal(@RequestBody List<Votes> votes){
+    public void viewFinal(@RequestBody List<String> results){
+        
+        String[] result = results.remove(0).split(",");
+
         try{
-            Collections.sort(votes,
-            Comparator.comparingInt(Votes::getNumOfVotes).reversed());
-            Votes winner = votes.remove(0);
+            // Collections.sort(votes,
+            // Comparator.comparingInt(Votes::getNumOfVotes).reversed());
+            // Votes winner = votes.remove(0);
             System.out.println("|=================================================================================================================");
             System.out.println("|\t\t\tElection Results");
             System.out.println("|=================================================================================================================");
             System.out.println("|                                                                                                               ");
-            System.out.println("|\t\t\tCandidate "+winner.getCandidate()+" has won the election with "+winner.getNumOfVotes());
+            System.out.println("|\t\t\tCandidate "+ result[0] +" has won the election with "+ result[1] +" Votes");
             System.out.println("|=================================================================================================================");
-            for (Votes v : votes){
-                System.out.println("| Candidate "+v.getCandidate()+" next with "+v.getNumOfVotes()+".");
+            for (String s : results){
+                result = s.split(",");
+                System.out.println("| Candidate "+ result[0] +" next with "+ result[1] +".");
             } 
             System.out.println("|=================================================================================================================");
         }

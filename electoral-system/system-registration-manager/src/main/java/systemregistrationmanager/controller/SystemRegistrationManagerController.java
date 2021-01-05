@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.ArrayList;
 
 import core.entity.Votes;
 
@@ -28,39 +30,35 @@ public class SystemRegistrationManagerController {
     @Autowired 
     SystemRegistrationManagerRepo repo;
 
-    // @PostMapping("/managers")
-    // public ResponseEntity<Manager> createManager(@RequestBody Manager manager) {
-    //     try {    
-    //         Manager managerInRepo = repo.save(manager);
-    //         return new ResponseEntity<>(managerInRepo, HttpStatus.CREATED);
-    //     } catch (Exception ex) {
-    //         ex.printStackTrace();
-    //         return new ResponseEntity<>(new Manager("1", "Murph"), HttpStatus.INTERNAL_SERVER_ERROR);
+    @Autowired
+    RestTemplate restTemplate;
+
+    // @RequestMapping(value = "/test", method = RequestMethod.GET)
+    // public void test() {
+    //     String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
+
+    //     for (String candidate : candidates) {
+    //         Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
+
+    //         List<Votes> votes = votesData.get();
+
+    //         int numOfVotes = 0;
+
+    //         for (Votes vote : votes) {
+    //             numOfVotes += vote.getNumOfVotes();
+    //         }
+    //         System.out.println(candidate + " : " + numOfVotes);
     //     }
     // }
-
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public void test() {
-        String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
-
-        for (String candidate : candidates) {
-            Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
-
-            List<Votes> votes = votesData.get();
-
-            int numOfVotes = 0;
-
-            for (Votes vote : votes) {
-                numOfVotes += vote.getNumOfVotes();
-            }
-            System.out.println(candidate + " : " + numOfVotes);
-        }
-    }
 
     @GetMapping("/SysRegMan/results")
     public void printResults() {
         String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
 
+        List<String> results = new ArrayList<>();
+
+        int maxNumOfVotes = 0;
+
         for (String candidate : candidates) {
             Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
 
@@ -71,7 +69,15 @@ public class SystemRegistrationManagerController {
             for (Votes vote : votes) {
                 numOfVotes += vote.getNumOfVotes();
             }
+
             System.out.println(candidate + " : " + numOfVotes);
+            if (numOfVotes > maxNumOfVotes) {
+                results.add(0, candidate + "," + numOfVotes); 
+                maxNumOfVotes = numOfVotes;   
+            } else {
+                results.add(candidate + "," + numOfVotes);
+            }
         }
+        restTemplate.postForObject("http://localhost:8050/forum/results", results, List.class); 
     }
 }
