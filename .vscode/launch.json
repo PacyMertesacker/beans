@@ -59,6 +59,16 @@
             "mainClass": "systemregistrationmanager.SystemRegistrationManagerApplication",
             "projectName": "system-registration-manager",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BallotCollectorApplication<ballot-collector>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ballotCollector.BallotCollectorApplication",
+            "projectName": "ballot-collector",
+            "args": ""
         }
     ]
 }

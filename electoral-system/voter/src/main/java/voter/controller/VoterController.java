@@ -39,7 +39,7 @@ public class VoterController {
 
         for (Voter voter : voters) {
             HttpEntity<Voter> request = new HttpEntity<>(voter);
-            String host = "http://localhost:8083/ballotcollector/voter";
+            String host = "http://ballot-collector/ballotcollector/voter";
             restTemplate.postForObject(host, request, Voter.class);
         }
 
@@ -58,7 +58,7 @@ public class VoterController {
 
         }
 
-        restTemplate.getForObject("http://localhost:8085/SysRegMan/results", Integer.class);
+        restTemplate.getForObject("http://system-registration-manager/SysRegMan/results", Integer.class);
 
         // for(Voter voter : voters){
         //     HttpEntity<Voter> request = new HttpEntity<>(voter);
@@ -75,24 +75,24 @@ public class VoterController {
         // restTemplate.getForObject("http://localhost:8084/ballotcollectorB", HashMap.class);
     }
 
-    private void sendVotes(int index) {
-        int unit = voters.length / numThreads;
+    // private void sendVotes(int index) {
+    //     int unit = voters.length / numThreads;
 
-        int secStart, secEnd;
+    //     int secStart, secEnd;
 
-        secStart = index * unit;
-        secEnd = secStart + unit;
+    //     secStart = index * unit;
+    //     secEnd = secStart + unit;
 
-        if (index == numThreads - 1) {
-            secEnd = voters.length;
-        }
+    //     if (index == numThreads - 1) {
+    //         secEnd = voters.length;
+    //     }
 
-        for (int i = secStart;i < secEnd;i++) {
-            HttpEntity<Voter> request = new HttpEntity<>(voters[i]);
-            String host = "http://localhost:8083/ballotcollector/voter";
-            restTemplate.postForObject(host, request, Voter.class);
-        }
-    }
+    //     for (int i = secStart;i < secEnd;i++) {
+    //         HttpEntity<Voter> request = new HttpEntity<>(voters[i]);
+    //         String host = "http://localhost:8083/ballotcollector/voter";
+    //         restTemplate.postForObject(host, request, Voter.class);
+    //     }
+    // }
 
     public static final Voter[] voters = {
         new Voter("Luke Kelly", "Vin Diesel with hair", "A"),

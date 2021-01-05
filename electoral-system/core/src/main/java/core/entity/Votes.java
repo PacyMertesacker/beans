@@ -29,7 +29,7 @@ public class Votes{
 
     @NonNull
     @Column
-    @Setter @Getter
+   // @Setter @Getter
     private int numOfVotes;
 
     public Votes(@JsonProperty("id") int id, @JsonProperty("candidate") String candidate, @JsonProperty("region") String region, @JsonProperty("numOfVotes") int numOfVotes){
@@ -39,5 +39,12 @@ public class Votes{
         this.numOfVotes = numOfVotes;
     }
 
+    public int getNumOfVotes() {
+        return numOfVotes;
+    }
+
+    public void setNumOfVotes(int numOfVotes) {
+        this.numOfVotes = numOfVotes;
+    }
 
 }
