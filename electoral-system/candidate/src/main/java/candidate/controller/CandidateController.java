@@ -1,60 +1,44 @@
 package candidate.controller;
 
 import core.entity.Candidate;
-import candidate.service.CandidateService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import core.exception.ApiRequestException;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 
 @RestController
 @RequestMapping("/candidate")
 public class CandidateController {
 
-    @Autowired CandidateService candidateService;
+    @Autowired
+    RestTemplate restTemplate;
 
-   /* @Autowired
-    public CandidateController(@Qualifier("CandidateService") CandidateService candidateService) {
-        this.candidateService = candidateService;
-    }*/
+    public static final Candidate[] candidates = {
+            new Candidate("Vin Diesel with hair", "TheFamily", "Blah Blah Blah TheFamily Blah Blah Blah"),
+            new Candidate("Vin Diesel", "FastAndFurious", "waddyamean"),
+    };
 
-    @PostMapping
-    public Candidate postCandidate(@RequestBody Candidate candidate) {
-        return candidateService.addCandidate(candidate);
-    }
-
-    @GetMapping
-    public List<Candidate> getAllCandidates(){
-        return candidateService.findAllCandidates();
-    }
-
-    @GetMapping("/id/{id}")
-    public Candidate getCandidateByID(@PathVariable("id") String id){
-        return candidateService.findCandidateByID(id);
-    }
-
-    @GetMapping("/name/")
+    @GetMapping("/name/{name}")
     public Candidate getCandidateByName(@PathVariable("name") String name){
-        return candidateService.findCandidateByName(name);
+        for (Candidate candidate : candidates)
+            if (candidate.getName().equals(name))
+                return candidate;
+        throw new ApiRequestException("No candidate by this name");
     }
 
-    @PutMapping("/id/{id}")
-    public Candidate putCandidateByID(@PathVariable("id") String id, @RequestBody Candidate candidate) {
-        return candidateService.replaceCandidateByID(id, candidate);
+    @GetMapping("/name")
+    public Candidate[] getAllCandidate(@PathVariable("name") String name){
+        return candidates;
     }
 
-    @DeleteMapping
-    public void deleteAllCandidates() {
-        candidateService.removeAllCandidates();
-    }
-
-    @DeleteMapping("/id/{id}")
-    public Candidate deleteCandidateByID(@PathVariable("id") String id) {
-        return candidateService.removeCandidateByID(id);
-    }
-
-    @DeleteMapping("/name/{name}")
-    public Candidate deleteCandidateByName(@PathVariable("name") String name) {
-        return candidateService.removeCandidateByName(name);
+    @PostMapping()
+    public void test() {
+        for(Candidate candidate : candidates) {
+            HttpEntity<String> request = new HttpEntity<>(candidate.getName());
+            restTemplate.postForObject("http://localhost:8081/ballotcollector/candidate", request, String.class);
+        }
     }
 }

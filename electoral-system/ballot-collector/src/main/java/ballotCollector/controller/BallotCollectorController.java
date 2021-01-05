@@ -36,19 +36,6 @@ public class BallotCollectorController {
         }
 
         repo.save(votes);
-
-        // HashMap<String, Integer> currRegionMap = regionMap.get(voter.getRegion());
-        // if(currRegionMap == null){
-        //     currRegionMap = new HashMap<String,Integer>(); 
-        // }
-
-        // Integer numVotes = currRegionMap.get(voter.getVotedFor()); 
-        // if(numVotes == null){
-        //     numVotes = 0;
-        // }
-
-        // currRegionMap.put(voter.getVotedFor(), ++numVotes);
-        // regionMap.put(voter.getRegion(), currRegionMap);
     }
 
     public Integer test(String candidate, String region){

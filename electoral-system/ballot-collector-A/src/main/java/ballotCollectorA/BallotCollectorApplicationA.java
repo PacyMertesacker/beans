@@ -1,24 +1,21 @@
-package voter;
+package ballotCollectorA;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
-
-import core.entity.Voter;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class VoterApplication {
+public class BallotCollectorApplicationA {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VoterApplication.class, args);
+		SpringApplication.run(BallotCollectorApplicationA.class, args);
 	}
 
 	@Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 }

@@ -7,7 +7,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>beans</groupId>
-	<artifactId>information-hub</artifactId>
+	<artifactId>ballot-collector-B</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	<description>demo of an electoral system using distributed technologies</description>
@@ -26,12 +26,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-cassandra</artifactId>
-			<!-- <version>2.0.0.RELEASE</version> -->
+			<!--<version>2.0.0.RELEASE</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- <version>2.3.3.RELEASE</version> -->
+			<!-- <version>2.3.3.RELEASE</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -45,9 +45,15 @@
 			<version>2.3.3.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.12.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>2.3.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>beans</groupId>
+			<artifactId>core</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -58,14 +64,14 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
-					<mainClass>informationhub.Client</mainClass>
+					<mainClass>ballotCollector.BallotCollectorApplication</mainClass>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>

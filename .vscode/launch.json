@@ -1,1 +1,64 @@
-{}
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerApplication<eureka>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "beans.eureka.EurekaServerApplication",
+            "projectName": "eureka",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BallotCollectorApplicationA<ballot-collector-A>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ballotCollectorA.BallotCollectorApplicationA",
+            "projectName": "ballot-collector-A",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BallotCollectorBApplication<ballot-collector-B>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ballotCollectorB.BallotCollectorBApplication",
+            "projectName": "ballot-collector-B",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CandidateApplication<candidate>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "candidate.CandidateApplication",
+            "projectName": "candidate",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-VoterApplication<voter>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "voter.VoterApplication",
+            "projectName": "voter",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SystemRegistrationManagerApplication<system-registration-manager>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "systemregistrationmanager.SystemRegistrationManagerApplication",
+            "projectName": "system-registration-manager",
+            "args": ""
+        }
+    ]
+}

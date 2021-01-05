@@ -56,4 +56,22 @@ public class SystemRegistrationManagerController {
             System.out.println(candidate + " : " + numOfVotes);
         }
     }
+
+    @GetMapping("/SysRegMan/results")
+    public void printResults() {
+        String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
+
+        for (String candidate : candidates) {
+            Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
+
+            List<Votes> votes = votesData.get();
+
+            int numOfVotes = 0;
+
+            for (Votes vote : votes) {
+                numOfVotes += vote.getNumOfVotes();
+            }
+            System.out.println(candidate + " : " + numOfVotes);
+        }
+    }
 }
