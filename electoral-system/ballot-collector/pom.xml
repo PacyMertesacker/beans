@@ -53,7 +53,7 @@
 			<groupId>beans</groupId>
 			<artifactId>core</artifactId>
 			<version>0.0.1</version>
-			<scope>compile</scope>
+			<!-- <scope>compile</scope> -->
 		</dependency>
 		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
