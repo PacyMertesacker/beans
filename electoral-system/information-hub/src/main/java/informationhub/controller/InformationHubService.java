@@ -50,9 +50,7 @@ public class InformationHubService{
         }
     }
 
-
-
-    // Check if a candidate is registered
+    // Check if a candidate is registered already
     @PostMapping("/forum/candidates/{id}")
     public ResponseEntity<String> checkCandidate(@PathVariable int id){
         try{
@@ -71,13 +69,13 @@ public class InformationHubService{
         }
     }
 
-    // Register a candidate
+    // Register a candidate from Candidate Class
     @PostMapping("/forum/candidates/register")
     public ResponseEntity<CandidateRegistration> registerCandidate(@RequestBody Candidate candidate){
         try{
             CandidateRegistration candidateRegistration = convertToCandidateRegistration(candidate);
-            Optional<CandidateRegistration> candidateReg = candidateRegistrationRepo.findById(candidateRegistration.getId());
-            if (!candidateReg.isPresent()) {
+            Optional<CandidateRegistration> candidateAlreadyExists = candidateRegistrationRepo.findByNameAndParty(candidateRegistration.getName(), candidateRegistration.getParty());
+            if (!candidateAlreadyExists.isPresent()) {
                 CandidateRegistration candidateInRepo = candidateRegistrationRepo.save(candidateRegistration);
                 return new ResponseEntity<>(candidateInRepo, HttpStatus.CREATED);            
             }
@@ -88,28 +86,6 @@ public class InformationHubService{
         catch(Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    // Get a list of all candidates currently registered in Candidate class:
-    @RequestMapping(value="/forum/candidates", method=RequestMethod.GET)
-    public void getCandidates(){
-        try{
-            RestTemplate restTemplate = new RestTemplate();
-            List<CandidateRegistration> candidateRegistrationList = new ArrayList<>();
-            Candidate[] candidates = restTemplate.getForObject("http://localhost:8083/candidate/name", Candidate[].class);
-            if (candidates.length > 0){
-                for(Candidate c : candidates){
-                    candidateRegistrationList.add(convertToCandidateRegistration(c));
-                }
-                candidateRegistrationRepo.saveAll(candidateRegistrationList);
-            }
-            else{
-                System.out.println("There are no candidates registered.");
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
         }
     }
 
