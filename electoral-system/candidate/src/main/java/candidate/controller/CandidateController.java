@@ -38,7 +38,7 @@ public class CandidateController {
     public void test() {
         for(Candidate candidate : candidates) {
             HttpEntity<String> request = new HttpEntity<>(candidate.getName());
-            restTemplate.postForObject("http://localhost:8081/ballotcollector/candidate", request, String.class);
+            restTemplate.postForObject("http://localhost:8083/ballotcollector/candidate", request, String.class);
         }
     }
 }

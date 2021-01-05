@@ -2,6 +2,9 @@ package ballotCollector.controller;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Arrays;
+import java.util.ArrayList;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,21 +24,27 @@ public class BallotCollectorController {
     BallotCollectorRepo repo;
 
     HashMap<String,HashMap<String,Integer>> regionMap = new HashMap<>();
+    ArrayList<String> candidates = new ArrayList<String>();//Arrays.asList(new String[] {"Vin diesel", "Vin Diesel with hair"});
 
     int votesId = 0;
 
     @PostMapping("/voter")
     public void addVote(@RequestBody Voter voter) {
-        Optional<Votes> votesData = repo.findByCandidateAndRegion(voter.getVotedFor(), voter.getRegion());
-        Votes votes;
-        if (votesData.isPresent()) {
-            votes = votesData.get();
-            votes.setNumOfVotes( votes.getNumOfVotes() + 1);
-        } else {
-            votes = new Votes(votesId++, voter.getVotedFor(), voter.getRegion(), 1);
-        }
+        if (candidates.contains( voter.getVotedFor() )) {
+            Optional<Votes> votesData = repo.findByCandidateAndRegion(voter.getVotedFor(), voter.getRegion());
+            Votes votes;
+            if (votesData.isPresent()) {
+                votes = votesData.get();
+                votes.setNumOfVotes( votes.getNumOfVotes() + 1);
+            } else {
+                votes = new Votes(votesId++, voter.getVotedFor(), voter.getRegion(), 1);
+            }
 
-        repo.save(votes);
+            repo.save(votes);
+        } else {
+            System.out.println("|"+ candidates.get(0) +"|");
+            System.out.println("|"+ candidates.get(1) +"|");
+        }
     }
 
     public Integer test(String candidate, String region){
@@ -48,6 +57,12 @@ public class BallotCollectorController {
         }
 
         return -1;
+    }
+
+    @PostMapping("/candidate")
+    public void addCandidate(@RequestBody String candidate) {
+        this.candidates.add(String.valueOf(candidate));
+        System.out.println(candidate.toString());
     }
 
     @GetMapping("/test")
