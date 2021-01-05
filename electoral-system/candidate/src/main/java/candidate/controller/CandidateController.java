@@ -30,7 +30,7 @@ public class CandidateController {
     }
 
     @GetMapping("/name")
-    public Candidate[] getAllCandidate(@PathVariable("name") String name){
+    public Candidate[] getAllCandidate(){
         return candidates;
     }
 

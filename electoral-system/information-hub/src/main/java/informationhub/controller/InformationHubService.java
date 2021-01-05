@@ -1,5 +1,6 @@
 package informationhub.controller;
 
+import core.entity.Candidate;
 import informationhub.entity.Forum;
 import informationhub.entity.CandidateRegistration;
 import informationhub.repository.InformationHubRepo;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -28,15 +31,15 @@ public class InformationHubService{
     @Autowired InformationHubRepo informationHubRepo;
     @Autowired CandidateRegistrationRepo candidateRegistrationRepo;
 
-    static int messageId = 0;
+    static int candidateId = 0;
 
     // Post a message in the forum
     @PostMapping("/forum")
     public ResponseEntity<Forum> postMessage(@RequestBody Forum forum){
         try{
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            messageId++;
-            forum.setMessageDetails(messageId, timestamp);
+            //messageId++;
+            //forum.setMessageDetails(messageId, timestamp);
             Forum messageInRepo = informationHubRepo.save(forum);
             return new ResponseEntity<>(messageInRepo, HttpStatus.CREATED);
         }
@@ -103,23 +106,59 @@ public class InformationHubService{
         }
     }
 
-    // Return a list of all candidates currently registered:
+    // Get a list of all candidates currently registered in Candidate class:
     @RequestMapping(value="/forum/candidates", method=RequestMethod.GET)
-    public ResponseEntity<List<CandidateRegistration>> getCandidates(){
+    public void getCandidates(){
         try{
-            List<CandidateRegistration> candidateRegistration = candidateRegistrationRepo.findAll();
-            Collections.sort(candidateRegistration);
-            if (!candidateRegistration.isEmpty()){
-                return new ResponseEntity<>(candidateRegistration, HttpStatus.CREATED);
+            RestTemplate restTemplate = new RestTemplate();
+            List<CandidateRegistration> candidateRegistrationList = new ArrayList<>();
+            Candidate[] candidates = restTemplate.getForObject("http://localhost:8083/candidate/name", Candidate[].class);
+            if (candidates.length > 0){
+                for(Candidate c : candidates){
+                    candidateRegistrationList.add(convertToCandidateRegistration(c));
+                }
+                candidateRegistrationRepo.saveAll(candidateRegistrationList);
             }
             else{
-                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                System.out.println("There are no candidates registered.");
             }
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // Print the candidates from Cassandra:
+    @RequestMapping(value="/forum/candidates/view", method=RequestMethod.GET)
+    public void viewCandidates(){
+        try{
+            List<CandidateRegistration> candidates = candidateRegistrationRepo.findAll();
+            Collections.sort(candidates);
+            System.out.println("|=================================================================================================================");
+            System.out.println("|\t\t\tCandidate Information");
+            for (CandidateRegistration c : candidates){
+                displayCandidate(c);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public CandidateRegistration convertToCandidateRegistration(Candidate c){
+        candidateId++;
+        return new CandidateRegistration(candidateId,c.getName(),c.getParty(),c.getBio());
+    }
+
+    public static void displayCandidate(CandidateRegistration cr) {
+		System.out.println("|=================================================================================================================");
+		System.out.println("|                                                                                                               ");
+		System.out.println(
+				"| Name: \n|\t" + String.format("%1$-31s", cr.getName()) + "\n" +
+				"| Party: \n|\t" + String.format("%1$-31s", cr.getParty()) + "\n" +
+				"| Manifesto: \n|\t" + String.format("%1$-31s", cr.getManifesto())+" ");
+		System.out.println("|                                                                                                               ");
+		System.out.println("|=================================================================================================================");
+	}
 
 }
