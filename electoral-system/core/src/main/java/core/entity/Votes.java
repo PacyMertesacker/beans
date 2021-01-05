@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.Getter;
 
 @Table
-public class Votes {
+public class Votes{
     @NonNull
     @PrimaryKey
     @Column
@@ -39,11 +39,4 @@ public class Votes {
         this.numOfVotes = numOfVotes;
     }
 
-    public int getNumOfVotes() {
-        return numOfVotes;
-    }
-
-    public void setNumOfVotes(int numOfVotes) {
-        this.numOfVotes = numOfVotes;
-    }
 }
