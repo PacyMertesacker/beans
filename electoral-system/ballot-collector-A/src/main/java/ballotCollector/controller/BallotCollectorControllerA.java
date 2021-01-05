@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import core.entity.Voter;
 
 @RestController
-@RequestMapping("/ballotcollector")
-public class BallotCollectorController {
+@RequestMapping("/ballotcollectorA")
+public class BallotCollectorControllerA {
     HashMap<String,Integer> voteMap = new HashMap<>();
     ArrayList<String> candidates = new ArrayList<>();
 
