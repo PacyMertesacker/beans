@@ -1,0 +1,18 @@
+version: '3'
+services:
+  ballot-collector:
+    build: ballot-collector
+
+  candidate:
+    build: candidate
+
+  information-hub:
+    build: information-hub
+
+  system-registration-manager:
+    build: system-registration-manager
+
+  voter:
+    build: voter
+    ports:
+      - "8084:8084"
