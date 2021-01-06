@@ -1,29 +1,16 @@
 package systemregistrationmanager.controller;
 
-import systemregistrationmanager.entity.Manager;
-import systemregistrationmanager.repository.SystemRegistrationManagerRepo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Optional;
-import java.util.List;
-import java.util.ArrayList;
-
 import core.entity.Votes;
+import systemregistrationmanager.repository.SystemRegistrationManagerRepo;
 
 @RestController
 public class SystemRegistrationManagerController {
@@ -32,24 +19,6 @@ public class SystemRegistrationManagerController {
 
     @Autowired
     RestTemplate restTemplate;
-
-    // @RequestMapping(value = "/test", method = RequestMethod.GET)
-    // public void test() {
-    //     String[] candidates = {"Vin Diesel", "Vin Diesel with hair"};
-
-    //     for (String candidate : candidates) {
-    //         Optional<List<Votes>> votesData = repo.findByCandidate(candidate);
-
-    //         List<Votes> votes = votesData.get();
-
-    //         int numOfVotes = 0;
-
-    //         for (Votes vote : votes) {
-    //             numOfVotes += vote.getNumOfVotes();
-    //         }
-    //         System.out.println(candidate + " : " + numOfVotes);
-    //     }
-    // }
 
     @GetMapping("/SysRegMan/results")
     public void printResults() {
@@ -78,6 +47,6 @@ public class SystemRegistrationManagerController {
                 results.add(candidate + "," + numOfVotes);
             }
         }
-        restTemplate.postForObject("http://localhost:8050/forum/results", results, List.class); 
+        restTemplate.postForObject("http://information-hub/forum/results", results, List.class); 
     }
 }

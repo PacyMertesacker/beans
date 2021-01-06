@@ -3,8 +3,6 @@ package informationhub.entity;
 import lombok.Setter;
 import lombok.Getter;
 
-import java.sql.Timestamp;
-import java.util.HashMap;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -54,5 +52,37 @@ public class CandidateRegistration implements Comparable<CandidateRegistration>{
 
     public String toString() {
         return String.format("{ id = %1$s \n name = %2$s \n party = %3$s \n manifesto = %4$s}", id, name, party, manifesto);
+    }
+
+    public int getId() {
+      return id;
+    }
+
+    public void setId(int id) {
+      this.id = id;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getParty() {
+      return party;
+    }
+
+    public void setParty(String party) {
+      this.party = party;
+    }
+
+    public String getManifesto() {
+      return manifesto;
+    }
+
+    public void setManifesto(String manifesto) {
+      this.manifesto = manifesto;
     }
 }

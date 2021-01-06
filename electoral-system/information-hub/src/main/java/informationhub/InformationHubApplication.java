@@ -11,5 +11,4 @@ public class InformationHubApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InformationHubApplication.class, args);
 	}
-
 }

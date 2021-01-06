@@ -1,30 +1,24 @@
 package informationhub.controller;
 
-import core.entity.Candidate;
-import core.entity.Votes;
-import informationhub.entity.CandidateRegistration;
-import informationhub.repository.InformationHubRepo;
-import informationhub.repository.CandidateRegistrationRepo;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+import core.entity.Candidate;
+import informationhub.entity.CandidateRegistration;
+import informationhub.repository.CandidateRegistrationRepo;
+import informationhub.repository.InformationHubRepo;
+
 
 @RestController
 public class InformationHubService{
@@ -40,9 +34,6 @@ public class InformationHubService{
         String[] result = results.remove(0).split(",");
 
         try{
-            // Collections.sort(votes,
-            // Comparator.comparingInt(Votes::getNumOfVotes).reversed());
-            // Votes winner = votes.remove(0);
             System.out.println("|=================================================================================================================");
             System.out.println("|\t\t\tElection Results");
             System.out.println("|=================================================================================================================");

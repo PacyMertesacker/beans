@@ -2,7 +2,6 @@ package ballotCollector.controller;
 
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 import org.springframework.http.HttpStatus;
@@ -24,13 +23,13 @@ public class BallotCollectorController {
     BallotCollectorRepo repo;
 
     HashMap<String,HashMap<String,Integer>> regionMap = new HashMap<>();
-    ArrayList<String> candidates = new ArrayList<String>();//Arrays.asList(new String[] {"Vin diesel", "Vin Diesel with hair"});
+    ArrayList<String> candidates = new ArrayList<String>();
 
     int votesId = 0;
 
     @PostMapping("/voter")
     public void addVote(@RequestBody Voter voter) {
-        if (candidates.contains( voter.getVotedFor() )) {
+        //if (candidates.contains(voter.getVotedFor())) {
             Optional<Votes> votesData = repo.findByCandidateAndRegion(voter.getVotedFor(), voter.getRegion());
             Votes votes;
             if (votesData.isPresent()) {
@@ -39,15 +38,11 @@ public class BallotCollectorController {
             } else {
                 votes = new Votes(votesId++, voter.getVotedFor(), voter.getRegion(), 1);
             }
-
             repo.save(votes);
-        } 
+        //} 
     }
 
-    public Integer test(String candidate, String region){
-        // HashMap<String, Integer> currRegionMap = regionMap.get(region);
-        // Integer numVotes = currRegionMap.get(candidate); 
-        
+    public Integer test(String candidate, String region){        
         Optional<Votes> votesData = repo.findByCandidateAndRegion(candidate, region);
         if (votesData.isPresent()) {
             return votesData.get().getNumOfVotes();

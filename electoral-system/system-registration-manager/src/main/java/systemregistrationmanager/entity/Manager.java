@@ -3,7 +3,6 @@ package systemregistrationmanager.entity;
 import lombok.Setter;
 import lombok.Getter;
 
-import java.util.HashMap;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;

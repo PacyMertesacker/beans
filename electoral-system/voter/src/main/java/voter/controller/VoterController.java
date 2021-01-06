@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/voter")
@@ -36,21 +33,11 @@ public class VoterController {
 
     @GetMapping("/test")
     public void test(){
-
         for (Voter voter : voters) {
             HttpEntity<Voter> request = new HttpEntity<>(voter);
             String host = "http://ballot-collector/ballotcollector/voter";
             restTemplate.postForObject(host, request, Voter.class);
         }
-
-        // for (int i = 0;i < numThreads;i++) {
-        //     final int index = i;
-        //     System.out.println(index);
-        //     new Thread(() -> sendVotes(index)).start();
-        // }
-
-        // new Thread(() -> sendVotes("A")).start();
-        // new Thread(() -> sendVotes("B")).start();
 
         try {
             Thread.sleep(2000);
@@ -59,40 +46,7 @@ public class VoterController {
         }
 
         restTemplate.getForObject("http://system-registration-manager/SysRegMan/results", Integer.class);
-
-        // for(Voter voter : voters){
-        //     HttpEntity<Voter> request = new HttpEntity<>(voter);
-        //     String host = "";
-        //     if(voter.getRegion() == "A"){
-        //         host = "http://localhost:8081/ballotcollectorA/voter";
-        //     }
-        //     else if(voter.getRegion() == "B"){
-        //         host = "http://localhost:8084/ballotcollectorB/voter";
-        //     }
-        //     restTemplate.postForObject(host, request, Voter.class);
-        // }
-        // restTemplate.getForObject("http://localhost:8081/ballotcollectorA", HashMap.class);
-        // restTemplate.getForObject("http://localhost:8084/ballotcollectorB", HashMap.class);
     }
-
-    // private void sendVotes(int index) {
-    //     int unit = voters.length / numThreads;
-
-    //     int secStart, secEnd;
-
-    //     secStart = index * unit;
-    //     secEnd = secStart + unit;
-
-    //     if (index == numThreads - 1) {
-    //         secEnd = voters.length;
-    //     }
-
-    //     for (int i = secStart;i < secEnd;i++) {
-    //         HttpEntity<Voter> request = new HttpEntity<>(voters[i]);
-    //         String host = "http://localhost:8083/ballotcollector/voter";
-    //         restTemplate.postForObject(host, request, Voter.class);
-    //     }
-    // }
 
     public static final Voter[] voters = {
         new Voter("Luke Kelly", "Vin Diesel with hair", "A"),

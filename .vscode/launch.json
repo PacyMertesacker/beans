@@ -69,6 +69,16 @@
             "mainClass": "ballotCollector.BallotCollectorApplication",
             "projectName": "ballot-collector",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-InformationHubApplication<information-hub>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "informationhub.InformationHubApplication",
+            "projectName": "information-hub",
+            "args": ""
         }
     ]
 }
